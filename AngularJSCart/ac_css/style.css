@@ -1,0 +1,152 @@
+﻿/* --- main layout --- */
+	
+* { margin: 0; padding: 0; }
+
+body {
+    min-height: 2000px; /* for bootstrap 3 fixed navbar fix */
+    padding: 70px 0px 0px 0px; /* for bootstrap 3 fixed navbar fix */  
+    margin:0;
+    -webkit-background-size: 100%; 
+    -moz-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html { 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+	
+
+.autoResizeImage {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+}
+.imageTable table {
+    width:100%;
+}
+
+.modal-body {
+  height:400px;
+  max-height:400px;
+}
+
+.modal {
+	position:fixed;
+	top:90px;
+}
+
+
+   
+#licool {
+    display: inline;
+} 
+
+   
+
+
+.clear {clear:both}
+.alignright {text-align:right}
+.aligncenter {
+    text-align:center !important;
+    -moz-center:center !important;
+}
+.aligncenter * {
+    margin: 0 auto !important;
+}  
+
+img {vertical-align:top;padding-top:0px;}
+
+.imgcart {
+    width:300px !important;
+    height:auto !important;
+    vertical-align:top !important;
+    padding-top:0px !important;
+    padding-bottom:12px !important;
+    padding-right:120px !important;
+}
+
+.photopopup (
+    max-width:280px !important;
+    width:280px !important;
+    height:auto !important;
+    vertical-align:top !important;
+    padding-top:0px !important;
+}
+
+.photopopupContainer {
+	margin-left:10px !important; 
+	margin-right:20px !important; 
+	text-align:center !important;
+}
+.photopopupContainer2 {
+    margin-top:0px!important; 
+	margin-left:10px!important; 
+	margin-right:20px!important; 
+	text-align:center;
+}
+
+	
+.clear {clear:both}
+.nowrp {white-space:nowrap;}
+.wrapper {width:100%; overflow:hidden;}
+
+#logo {
+	top: 0;
+	padding: 4px 0 0 0;
+	vertical-align:top;
+}
+
+#zheader {
+ width: 100%;
+ margin: 0 auto !important;
+ float: none !important;
+ text-align: center;
+}
+
+
+
+
+/*!
+ * Extend Bootstrap v2.3.2 to provide cell alignment (doh)
+ *
+ */
+.table td.tdRight {
+  text-align: right;
+}
+.table td.tdCenter {
+  text-align: center;
+}
+.table-nonfluid {
+   width: auto;
+}
+.table tr {
+   height:2px !important;
+}
+.table td {
+   height:2px !important;
+}
+
+
+      li{
+        line-height: 30px;
+      }
+      .codebox{
+        border:2px solid;
+        border-radius:2px;
+        background-color:#c9e2b8;
+        padding:20px;
+      }
+      pre{
+        padding: 10px;
+        line-height:30px;
+        color:#4c3f3d;
+        font-size: 14px;
+      }

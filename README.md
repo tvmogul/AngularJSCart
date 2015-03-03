@@ -1,13 +1,18 @@
-# AngularJSCart
-AngularJS Responsive Shopping Cart with Video
-
 <!DOCTYPE html>
+<!-- saved from url=(0067)http://www.codeproject.com/script/Articles/ViewHtml.aspx?aid=881354 -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Article Source</title>
 <link rel="stylesheet" type="text/css" href="./article_files/Main.css">
 <!--<base href="http://www.codeproject.com/KB/HTML/">--><base href=".">
 </head>
 <body>
+<!--
+HTML for article "AngularJS Responsive Shopping Cart with Video" by William SerGio
+URL: http://www.codeproject.com/KB/HTML/881354.aspx
+Copyright 2015 by William SerGio
+All formatting, additions and alterations Copyright © CodeProject, 1999-2015
+-->
+
 
 
 <p><b>Please choose 'View Source' in your browser to view the HTML, or File | Save to save this 
@@ -31,7 +36,7 @@ file to your hard drive for editing.</b></p>
 
 <p>&nbsp;</p>
 
-<p><img height="480px" src="http://www.software-rus.com/articles/AngularResponsiveCart/images/store1.gif" width="368px"></p>
+<p><img height="480px" src="./article_files/store1.gif" width="368px"></p>
 
 <p><span style="color: rgb(255, 153, 0); font-size: 30px;">Introduction</span></p>
 

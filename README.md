@@ -31,7 +31,7 @@ file to your hard drive for editing.</b></p>
 
 <p>&nbsp;</p>
 
-<p><img height="480px" src="./article_files/store1.gif" width="368px"></p>
+<p><img height="480px" src="http://www.software-rus.com/articles/AngularResponsiveCart/images/store1.gif" width="368px"></p>
 
 <p><span style="color: rgb(255, 153, 0); font-size: 30px;">Introduction</span></p>
 

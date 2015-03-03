@@ -1,4 +1,10 @@
-﻿    .puffed {
+﻿ .nav-pills li:hover{
+    background-color: #44A1FF !important;  
+    color:#fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5)   
+}
+
+    .puffed {
          padding: 2px 18px 0px 8px !important;
          font:normal 28pt Arial;
          color:#FFFFFF;

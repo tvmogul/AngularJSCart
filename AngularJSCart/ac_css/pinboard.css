@@ -133,11 +133,14 @@ button.flr-top {
     
  /* WS */   
  /* controls hover background color */   
-.nav-pills li:hover{
-    background-color: #333333 !important;  /* #ff9900 !important; */
+ /* #ff9900 #333333 !important; */
+
+ .nav-pills li:hover{
+    background-color: #8f0222 !important;  
     color:#fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.5)   
 }
+
 
 .nav-pills li:hover img{
     -webkit-transform: scale(1.1);  

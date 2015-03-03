@@ -292,6 +292,16 @@ function MyMenu($scope, $location) {
 
     }
     
+    $scope.changeColor = function (event) {
+        event.preventDefault();
+
+        $('#picker').colpick();
+
+        //$("body").css('background-image', '');
+        //$("body").css("background", "#ffffff url(" + _bgImage + ") no-repeat center center fixed");
+        //localStorage['bg_cart'] = _bgImage;
+    }
+
     $scope.changeNavBar = function (css_name) {
         event.preventDefault();
         var _path = "ac_css/" + css_name + ".css";

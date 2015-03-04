@@ -3,7 +3,7 @@
 <!-- Start Article -->
 <span id="ArticleContent">
 
-<h2>Introduction</span></h2>
+<h2>AngularJS Responsive Video Mobile Shopping Cart</h2>
 
 <p>This article presents a full-featured, Mobile AngularJS Shopping Cart with Videos and many other goodies.</p>
 

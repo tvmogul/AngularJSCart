@@ -3,24 +3,20 @@
 <!-- Start Article -->
 <span id="ArticleContent">
 
+<h2>Introduction</span></h2>
 
-<p>&nbsp;</p>
+<p>This article presents a full-featured, Mobile AngularJS Shopping Cart with Videos and many other goodies.</p>
 
 <table style="max-width:600px !important;">
 	<tbody>
 		<tr>
-			<td style="vertical-align:middle;"><img src="http://www.software-rus.com/AngularResponsiveCart/images/store1.gif" height="480px" width="368px"></td>
-			<td style="vertical-align:middle;"><img src="http://www.software-rus.com/AngularResponsiveCart/images/arrows.png" height="100px" width="100px"></td>
-			<td style="vertical-align:middle;"><img src="http://www.software-rus.com/AngularResponsiveCart/images/mobilecart.jpg" height="405px" width="210px"></td>
+			<td style="vertical-align:middle;"><img src="http://www.software-rus.com/Articles/AngularResponsiveCart/images/store1.gif" height="480px" width="368px"></td>
+			<td style="vertical-align:middle;"><img src="http://www.software-rus.com/Articles/AngularResponsiveCart/images/arrows.png" height="100px" width="100px"></td>
+			<td style="vertical-align:middle;"><img src="http://www.software-rus.com/Articles/AngularResponsiveCart/images/mobilecart.jpg" height="405px" width="210px"></td>
 		</tr>
 	</tbody>
 </table>
 
-<p><span style="color: rgb(255, 153, 0); font-size: 30px;">Introduction</span></p>
-
-<p>This article presents a full-featured, Mobile AngularJS Shopping Cart with Videos and many other goodies.</p>
-
-<hr>
 <h2 id="sec1">Shopping Cart Features</h2>
 
 <p>Here are some of the practical features I included:</p>

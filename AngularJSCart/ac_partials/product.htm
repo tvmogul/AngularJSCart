@@ -4,9 +4,12 @@
     <div ng-show="product.imagename.length > 1">
             <img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" style="padding-right:20px !important;" /><br />
     </div>
-    <div ng-show="product.showvideo > 0 && product.imagename.length < 1">
-        <iframe class="imgcart" style="padding-bottom: 24px !important;max-height: 280px !important;overflow:hidden;height:280px;width:300px" width="300" height="280" src="http://www.youtube.com/embed/{{product.videoid}}" frameborder="0" allowfullscreen></iframe><br />
-    </div>
+
+     <div ng-show="product.showvideo > 0 && product.imagename.length < 1" class="video-wrapper">
+         <div class="video-container">
+             <iframe width="300" height="280" src="http://www.youtube.com/embed/{{product.videoid}}" frameborder="0" allowfullscreen></iframe><br />
+         </div>
+     </div>
 
     <span style="font-family:Arial Black;font-size:1.8em;font-weight:bold;" ng-bind-html-unsafe="product.productname"></span><br />
      <!--  <span class="product-name" ng-bind-html-unsafe="product.productname"></span><br /> -->

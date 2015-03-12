@@ -184,7 +184,8 @@
        -o-transition: all 0.3s ease-out;  /* Opera 10.50�12.00 */
           transition: all 0.3s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
     }
-    
+  
+/* WS */
 .activegrid ul.nav-pills li:hover img 
 {
 	-webkit-transform: scale(1.1);  
@@ -193,6 +194,7 @@
        -o-transform: scale(1.1);  
           transform: scale(1.1);  
 }
+
 .activegrid .nav-pills .cbp-vm-title {
 	font-size: 1.3em;
     font-weight: 700;

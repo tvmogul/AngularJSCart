@@ -45,15 +45,19 @@
         <div class="clear"></div>
         <div id="cbp-vm" class="cbp-vm-switcher" ng-class="{true: '', false: 'activegrid'}[isActive]">
         <ul id="product" class="nav-pills nav-stacked rectangle-list">
-            <li ng-animate="'animate'" ng-repeat="product in pagedItems[currentPage] | filter:query | orderBy:'sortorder'" >
+            <li ng-animate="'animate'" ng-repeat="product in pagedItems[currentPage] | filter:query | orderBy:'sortorder'">
 
                 <div ng-show="product.showvideo < 1">
-                    <a href="#" ng-click="launchSimpleModal(product)"><img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" class="imgcart" /></a><br />
+                    <!--USE THIS TO POPUP MODAL DIALOG: <a href="#" ng-click="launchSimpleModal(product)"><img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" class="imgcart" /></a><br />-->
+                    <img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" class="imgcart" /><br />
+                </div>
 
+                <div ng-show="product.showvideo > 0" class="video-wrapper">
+                    <div class="video-container">
+                        <iframe width="300" height="280" src="http://www.youtube.com/embed/{{product.videoid}}" frameborder="0" allowfullscreen></iframe><br />
+                    </div>
                 </div>
-                <div ng-show="product.showvideo > 0">
-                    <iframe class="imgcart" style="padding-bottom: 24px !important;max-height: 280px !important;overflow:hidden;height:280px;width:300px" width="300" height="280" src="http://www.youtube.com/embed/{{product.videoid}}" frameborder="0" allowfullscreen></iframe><br />
-                </div>
+
                 <div style="padding-bottom: 2px !important;"></div>
 
                 <a class="ztitle" href="#/products/{{product.sku}}"><span ng-bind-html-unsafe="product.productname"></span></a>
@@ -61,16 +65,16 @@
 
 
                 <a href="" ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)">
-                <div class="btn btn-cart">Add cart</div>
+                    <div class="btn btn-cart">Add cart</div>
                 </a>
                 <a class="details-button" href="#/products/{{product.sku}}">
-                <div class="btn btn-cart">Details</div>
+                    <div class="btn btn-cart">Details</div>
                 </a>
                 <a class="categoryname" href="#">{{product.categoryname}}</a>
-                <p class="content_desc"> 
-                        {{product.unitprice | currency}} 
-                        <span ng-show="cart.getTotalCount(product.sku) > 0"><i class="fa fa-check"></i>{{cart.getTotalCount(product.sku)}}</span>
-                    </p>
+                <p class="content_desc">
+                    {{product.unitprice | currency}}
+                    <span ng-show="cart.getTotalCount(product.sku) > 0"><i class="fa fa-check"></i>{{cart.getTotalCount(product.sku)}}</span>
+                </p>
                 <div ng-show="product.link.length > 0">
                     <p style=" text-align:left;"><a href="{{product.link}}" target="_blank"><span class="btn btn-custom">{{product.linktext}}</span></a></p>
                 </div>

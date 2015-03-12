@@ -91,16 +91,6 @@ button.flr-top {
 	 background-image: none;
 }
 
-/*
-.container li{
-    border-bottom: 1px solid #eee; 
-    font-size: 14px; 
-    list-style: none; 
-    padding: 30px 0 20px 30px; 
-    position: relative; 
-    background-color:rgba(255,255,255,1);
-}
-*/
 /* BIG CONFLICT WITH CONTAINER !!! NEED TO RE-WRITE THIS !!! */
 .container li{
     border-bottom: 1px solid #eee; 
@@ -110,6 +100,8 @@ button.flr-top {
     position: relative; 
     background-color:rgba(255,255,255,1);
 }
+
+
 
 .nav-pills{margin-top:30px; margin-left:0;}
 
@@ -149,7 +141,8 @@ button.flr-top {
     -o-transform: scale(1.1);  
     transform: scale(1.1);
 }   
- 
+
+
 .nav-pills li:hover a{color:#fff;}  
 
 .nav-pills li:hover .categoryname{color:rgba(255,255,255,0.5);} 

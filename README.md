@@ -1,52 +1,22 @@
-<!DOCTYPE html>
-<!-- saved from url=(0067)http://www.codeproject.com/script/Articles/ViewHtml.aspx?aid=881354 -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Article Source</title>
-<link rel="stylesheet" type="text/css" href="./article_files/Main.css">
-<!--<base href="http://www.codeproject.com/KB/HTML/">--><base href=".">
-</head>
-<body>
-<!--
-HTML for article "AngularJS Responsive Shopping Cart with Video" by William SerGio
-URL: http://www.codeproject.com/KB/HTML/881354.aspx
-Copyright 2015 by William SerGio
-All formatting, additions and alterations Copyright © CodeProject, 1999-2015
--->
-
-
-
-<p><b>Please choose 'View Source' in your browser to view the HTML, or File | Save to save this 
-file to your hard drive for editing.</b></p>
-
-<hr class="Divider subdue">
-<div>
-
-
-
+﻿<body>
 
 <!-- Start Article -->
 <span id="ArticleContent">
 
+<h2>AngularJS Responsive Video Mobile Shopping Cart</h2>
 
-<ul class="download">
-	<li><a href="http://www.codeproject.com/KB/HTML/881354/AngularJSCart.zip">Download AngularJSCart.zip - 9.7 MB</a></li>
-</ul>
+<p>This article presents a full-featured, Mobile AngularJS Shopping Cart with Videos and many other goodies.</p>
 
-<p><a href="http://www.software-rus.com/storefront.html#/store" target="_blank">Click Here to See An Online Demo of this AngularJS Cart</a></p>
+<table style="max-width:600px !important;">
+	<tbody>
+		<tr>
+			<td style="vertical-align:middle;"><img src="http://www.software-rus.com/Articles/AngularResponsiveCart/images/store1.gif" height="480px" width="368px"></td>
+			<td style="vertical-align:middle;"><img src="http://www.software-rus.com/Articles/AngularResponsiveCart/images/arrows.png" height="100px" width="100px"></td>
+			<td style="vertical-align:middle;"><img src="http://www.software-rus.com/Articles/AngularResponsiveCart/images/mobilecart.jpg" height="405px" width="210px"></td>
+		</tr>
+	</tbody>
+</table>
 
-<p>&nbsp;</p>
-
-<p><img height="480px" src="./article_files/store1.gif" width="368px"></p>
-
-<p><span style="color: rgb(255, 153, 0); font-size: 30px;">Introduction</span></p>
-
-<p><strong>Note:</strong> the products in the sample cart are NOT real. You can't buy them--they are just for demonstration purposes only.</p>
-
-<p>There are a lot of people who are not computer or Internet savy but who need a simple shopping cart that doesn't require a database or a programmer to install it. I recall a customer calling me up once for tech support for one of my software programs and telling me "Your software doesn't work!" I asked what was the problem and he stated that he was stepping on the "foot pedal" and nothing was happening. It turned out that he had put the mouse on the floor and thought you had to pump it with your foot. Needles to say it was a challenge to help him.&nbsp;</p>
-
-<p>Bernardo Castilho wrote an article here on CodeProject entitled "A Shopping Cart Application Built with AngularJS" that was an excellent introduction to creating a shopping cart in AngularJS. The article was excellent in discussing the basic principles involved in creating a shopping cartusing AngularJS but the shopping cart was a very basic shopping cart. So I thought I would re-write his cart and add a lot more of the features you need to have a truly parcatical shopping cart in AngularJS.</p>
-
-<hr>
 <h2 id="sec1">Shopping Cart Features</h2>
 
 <p>Here are some of the practical features I included:</p>
@@ -72,25 +42,51 @@ file to your hard drive for editing.</b></p>
 	<li>Must include Filter &amp; Sort Options</li>
 </ul>
 
-<p>To start with I wanted to include a <em>Pinterest Style Layout</em>&nbsp;so I decided to use a common one that I have seen used often, namely, <em>VieModeSwitch</em>, that you can find at:&nbsp;https://github.com/codrops/ViewModeSwitch. &nbsp;<br>
-<em>ViewModeSwitch</em> is primarily a CSS solution which makes it easy to incorporate into an AnglarJS project.</p>
+<p>I used <strong>Bootstrap 3 </strong>but <strong>NOT </strong><em>ui.bootstrap</em>&nbsp;because ui.bootstrap gives me headaches trying to keep up with their changes. <strong>Bootstrap 3</strong> has <em><strong>navbars </strong></em>where
+ it easy to change the look-and-feel of the navbars from in side your 
+app using AngularJS as demonstrated below in the shopping cart.​<br>
+<br>
+I decided to add some <em><strong>Color Coordination </strong></em>with 
+the navbars so that each navbar would have its own hover color when 
+hovering over the pills. In each style sheet for each navbar we have the
+ hover css as follows.</p>
 
-<p>I used <strong>Bootstrap 3 </strong>but <strong>NOT </strong><em>ui.bootstrap</em>&nbsp;because ui.bootstrap gives me headaches trying to keep up with their changes. <strong>Bootstrap 3</strong> has <em><strong>navbars </strong></em>where it easy to change the look-and-feel of the navbars from in side your app using AngularJS as demonstrated below in the shopping cart.​<br>
-<br>
-<img height="249px" src="./article_files/navbars.jpg" width="600px"><br>
-<br>
-I added a dialog service, see '<em>storeMessages</em>', because I &nbsp;didn't want to pollute the DOM with modal content. As a service we defer it until the point the service is called.passing the data into the modal. Whereas with a directive we would need custom attributes (that would differ from modal to modal) and that means the data would have to be put on the scope before it could be passed in, which is not always convenient. You should customize this dialog service to whatever look and feel and functionality you want in your own cart. You should customize this rudimentary dialog service I added to suite your own needs in your shopping cart.<br>
-<br>
-My goal is an AngularJS&nbsp;app that looks and behaves nicely on any mobiel device or laptop as show below.<br>
-<br>
-<img height="509px" src="./article_files/handphone.png" width="600px"><br>
-<br>
+<pre>&nbsp;.nav-pills li:hover{
+&nbsp;&nbsp;&nbsp; background-color: #6d0019 !important; &nbsp;
+&nbsp;&nbsp;&nbsp; color:#fff;
+&nbsp;&nbsp;&nbsp; box-shadow: 0 2px 6px rgba(0,0,0,0.5)&nbsp; &nbsp;
+}
+
+</pre>
+
+<p>Which produces the different hover effects for each navbar.</p>
+
+<p>I added a dialog service, see '<em>storeMessages</em>', because I 
+&nbsp;didn't want to pollute the DOM with modal content. As a service we
+ defer it until the point the service is called.passing the data into 
+the modal. Whereas with a directive we would need custom attributes 
+(that would differ from modal to modal) and that means the data would 
+have to be put on the scope before it could be passed in, which is not 
+always convenient. You should customize this dialog service to whatever 
+look and feel and functionality you want in your own cart. You should 
+customize this rudimentary dialog service I added to suite your own 
+needs in your shopping cart.</p>
+<p>
+My goal is an AngularJS&nbsp;app that looks and behaves nicely on any mobiel device or laptop as show below.</p>
+<p>
 In a week or two I will be adding an editor I &nbsp;wrote in AngularJS to easily create and edit the JSON&nbsp;<strong>products.txt</strong> file where the store's products are stored. And you can always find the latest code for my projects on my website at: <a href="http://www.software-rus.com/" target="_blank">www.software-rus.com</a></p>
 
-<hr>
 <h2 id="sec2">AngularJS App Structure</h2>
 
-<p>The sample application starts with the definition of an <strong>AngularJS</strong> module that represents the application. The module <strong>AngularStore</strong> module is defined in the <strong>app.js</strong> file passes in two dependcies, namely ['ui.bootstrap', 'favicon'].&nbsp; I decide to use "ui.bootstrap" in a minimal way as a dependency to "AngularStore" for the menu and part of the UI look I wanted. And I added favicon to help to add images from websites to the menu. In addition, I also added <strong>jQuery</strong> to simply demonstrate how to integrate it with an<strong> AngularJS</strong> application. The “shoppingCart” class contains all the logic and provides the object model needed to create fully responsive and attractive views.</p>
+<p>The sample application starts with the definition of an <strong>AngularJS</strong> module that represents the application. The module <strong>AngularStore</strong> module is defined in the <strong>app.js</strong>
+ file passes in two dependcies, namely ['ui.bootstrap', 
+'favicon'].&nbsp; I decide to use "ui.bootstrap" in a minimal way as a 
+dependency to "AngularStore" for the menu and part of the UI look I 
+wanted. And I added favicon to help to add images from websites to the 
+menu. In addition, I also added <strong>jQuery</strong> to simply demonstrate how to integrate it with an<strong> AngularJS</strong>
+ application. The “shoppingCart” class contains all the logic and 
+provides the object model needed to create fully responsive and 
+attractive views.</p>
 
 <pre>var storeApp = angular.module('AngularStore', ['favicon', 'storeMessages.services'])
 &nbsp; .config(['$routeProvider', function ($routeProvider) {
@@ -113,13 +109,36 @@ In a week or two I will be adding an editor I &nbsp;wrote in AngularJS to easily
 &nbsp; } ]);
 </pre>
 
-<p>The first thing you will notice is that I prefaced each of our AmgularJS folders with "ac_" so that when we can just drop the cart into an existing website on a server at the root level and our folders will not conflict with existing folders or files.</p>
+<p>The first thing you will notice is that I prefaced each of our 
+AmgularJS folders with "ac_" so that when we can just drop the cart into
+ an existing website on a server at the root level and our folders will 
+not conflict with existing folders or files.</p>
 
-<p>We have a <strong>routeProvider</strong> that specifies which view should be displayed based on the URL. For example, when the URL ends with “/cart”, the app should load the view defined in the "ac_partials/cart.htm” file. And we will bind all of our views to a controller “storeController,” a class that contains a “store” and a “cart”.&nbsp;&nbsp;<br>
+<p>We have a <strong>routeProvider</strong> that specifies which view 
+should be displayed based on the URL. For example, when the URL ends 
+with “/cart”, the app should load the view defined in the 
+"ac_partials/cart.htm” file. And we will bind all of our views to a 
+controller “storeController,” a class that contains a “store” and a 
+“cart”.&nbsp;&nbsp;<br>
 <br>
-The easiest way to share data between controllers in <strong>AngularJS</strong> is by defining an app-level “service” to initialize the controllers that need them. We will create a data service that provides a store and a shopping cart that will be shared by all views instead of creating fresh ones for each view to improve performance by eliminating the need to re-load the store and cart items each time a new view is displayed.&nbsp; We want our “DataService” to retrieve our sotre products data from a JSON text file. Here is the definition of the “DataService” that provides data shared by all views in the Angular Store application.<br>
+The easiest way to share data between controllers in <strong>AngularJS</strong>
+ is by defining an app-level “service” to initialize the controllers 
+that need them. We will create a data service that provides a store and a
+ shopping cart that will be shared by all views instead of creating 
+fresh ones for each view to improve performance by eliminating the need 
+to re-load the store and cart items each time a new view is 
+displayed.&nbsp; We want our “DataService” to retrieve our sotre 
+products data from a JSON text file. Here is the definition of the 
+“DataService” that provides data shared by all views in the Angular 
+Store application.<br>
 <br>
-<span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">Our<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">DataService</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>will load data from a json file<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">asynchronously</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>so we will need to use<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">promise</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>and<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">deferred</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">. A<span class="Apple-converted-space">&nbsp;</span></span><em style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">promise</em><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>in Angular.js act as an placeholder from where a javascript object returns some result as data which is done in an asynchronous way and it does not guarantee any fixed response time. This<span class="Apple-converted-space">&nbsp;</span></span><em style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">deferred object</em><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>is constructed with<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">$q.defer()</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">. This Api is used to notify the success or unsuccesful completion of the asynchronous work, which is within the context of Deferred Api. After completing the task in<span class="Apple-converted-space">&nbsp;</span></span><em style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">deferred object</em><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">, we can have access to the result in<span class="Apple-converted-space">&nbsp;</span></span><em style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">promise object</em><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">.</span></p>
+<span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">Our<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">DataService</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>will load data from a json file<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">asynchronously</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>so we will need to use<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">promise</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>and<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">deferred</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">. A<span class="Apple-converted-space">&nbsp;</span></span><em style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">promise</em><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>in
+ Angular.js act as an placeholder from where a javascript object returns
+ some result as data which is done in an asynchronous way and it does 
+not guarantee any fixed response time. This<span class="Apple-converted-space">&nbsp;</span></span><em style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">deferred object</em><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>is constructed with<span class="Apple-converted-space">&nbsp;</span></span><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">$q.defer()</strong><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">.
+ This Api is used to notify the success or unsuccesful completion of the
+ asynchronous work, which is within the context of Deferred Api. After 
+completing the task in<span class="Apple-converted-space">&nbsp;</span></span><em style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">deferred object</em><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">, we can have access to the result in<span class="Apple-converted-space">&nbsp;</span></span><em style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">promise object</em><span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">.</span></p>
 
 <pre>// create a data service that provides a store and a shopping cart that
 // will be shared by all views (instead of creating fresh ones for each view).
@@ -204,7 +223,9 @@ storeApp.factory('DataService', function ($http, $q) {
 <hr>
 <h2 id="sec33">The Bootstrap 3 Menu Control</h2>
 
-<p>I kept the menu control for our Bootstrap 3 menu very simple as you can see below. To set the active tab I used&nbsp;ng-controller to run a single controller outside of the ng-view as shown below.</p>
+<p>I kept the menu control for our Bootstrap 3 menu very simple as you 
+can see below. To set the active tab I used&nbsp;ng-controller to run a 
+single controller outside of the ng-view as shown below.</p>
 
 <pre>&lt;li ng-class="{ active: isActive('/store')}"&gt;&lt;a ng-href="storefront.html#/store"&gt;Store &lt;/a&gt;&lt;/li&gt;</pre>
 
@@ -252,38 +273,64 @@ storeApp.factory('DataService', function ($http, $q) {
 }
 </pre>
 
-<p>&nbsp;</p>
-
-<hr>
 <h2>Our Angular Views: Store, Product, and Cart</h2>
 
-<p>The look and feel of a shopping cart is very important so I decided to use a Pinterest Style Layout that can be switched with a ListView Layout which is commonly seen in more expensive shopping carts. I used as a starting point a non-AngularJS css layout called ViewModeSwitch that I modified for AngularJS that I found on GitHub at: <a href="https://github.com/codrops/ViewModeSwitch"> https://github.com/codrops/ViewModeSwitch</a></p>
+<p>The look and feel of a shopping cart is very important so I decided 
+to use a Pinterest Style Layout that can be switched with a ListView 
+Layout which is commonly seen in more expensive shopping carts. I used 
+as a starting point a non-AngularJS css layout called ViewModeSwitch 
+that I modified for AngularJS that I found on GitHub at: <a href="https://github.com/codrops/ViewModeSwitch"> https://github.com/codrops/ViewModeSwitch</a></p>
 
 <p>Our responsive AngularJS&nbsp;Store App has three main views:</p>
 
-<p><strong>Store View</strong>: This is the first view that is loaded when the app runs showing the products available. Users can search for items using a filter, and obtain detailed information about specific products by watching the product's TV commercial (i.e., video) if the product has one, or by clicking the product name. Users can also add products to the shopping cart if they have a price or obtain a free sample of a product if a product has a zero cost.&nbsp; Users can also view a summary of what is in their cart by clicking the summary which navigates to the cart. Shown below are what the responsive store view looks like on both a laptop and on a mobile device.</p>
+<p><strong>Store View</strong>: This is the first view that is loaded 
+when the app runs showing the products available. Users can search for 
+items using a filter, and obtain detailed information about specific 
+products by watching the product's TV commercial (i.e., video) if the 
+product has one, or by clicking the product name. Users can also add 
+products to the shopping cart if they have a price or obtain a free 
+sample of a product if a product has a zero cost.&nbsp; Users can also 
+view a summary of what is in their cart by clicking the summary which 
+navigates to the cart. Shown below are what the responsive store view 
+looks like on both a laptop and on a mobile device.</p>
 
-<p><img height="405px" src="./article_files/shoppingcart1.jpg" width="550px"></p>
+<p style="page-break-after: avoid;"><strong>Product View:</strong> This 
+view shows more details about a product and also allows users to add or 
+remove the product in/from the shopping cart and shows how many of the 
+product are added to the cart. You can display a video of the product or
+ an image. If an image of the product is displayed then clicking on the 
+image will popup a dialog showing a larger view of the image. You can 
+see below what the Product View looks like with an image displayed.</p>
 
-<p><img height="405px" src="./article_files/mobilecart.jpg" width="210px"></p>
+<p><strong>Cart View</strong>: This view shows the shopping cart. Users can edit the cart and checkout using <strong>PayPal, Google Wallet, and stripe</strong>.
+ Check my website in the next week and I will also add a Bit Coin 
+Payment option as well. Offering more payment options increases sales by
+ boosting the seller's credibility. Below is what the Cart View looks 
+like on a laptop.</p>
 
-<p style="page-break-after: avoid;"><strong>Product View:</strong> This view shows more details about a product and also allows users to add or remove the product in/from the shopping cart and shows how many of the product are added to the cart. You can display a video of the product or an image. If an image of the product is displayed then clicking on the image will popup a dialog showing a larger view of the image. You can see below what the Product View looks like with an image displayed.</p>
-
-<p><img height="360px" src="./article_files/shoppingcart2.jpg" width="550px"></p>
-
-<p><strong>Cart View</strong>: This view shows the shopping cart. Users can edit the cart and checkout using <strong>PayPal, Google Wallet, and stripe</strong>. Check my website in the next week and I will also add a Bit Coin Payment option as well. Offering more payment options increases sales by boosting the seller's credibility. Below is what the Cart View looks like on a laptop.</p>
-
-<p><img height="405px" src="./article_files/shoppingcart3.jpg" width="550px"></p>
-
-<p>The service reads our "products.txt" JSON file of products and creates a “store” object that containing the products available and a “shoppingCart” object that automatically loads its contents from local storage.&nbsp;The cart provides three checkout methods:</p>
+<p>The service reads our "products.txt" JSON file of products and 
+creates a “store” object that containing the products available and a 
+“shoppingCart” object that automatically loads its contents from local 
+storage.&nbsp;The cart provides three checkout methods:</p>
 
 <ol>
-	<li><strong>PayPal</strong>. Thispayment method specifies the merchant account or BuyNow account(not a merchant account) to use for payment. To use PayPal, you have to create either a BuyNow Account or a merchant account with PayPal. You can do that here: <a href="https://www.paypal.com/webapps/mpp/merchant">https://www.paypal.com/webapps/mpp/merchantaypal.com/webapps/mpp/merchant</a></li>
+	<li><strong>PayPal</strong>. Thispayment method specifies the merchant 
+account or BuyNow account(not a merchant account) to use for payment. To
+ use PayPal, you have to create either a BuyNow Account or a merchant 
+account with PayPal. You can do that here: <a href="https://www.paypal.com/webapps/mpp/merchant">https://www.paypal.com/webapps/mpp/merchantaypal.com/webapps/mpp/merchant</a></li>
 	<li><strong>Google Wallet</strong>. This payment method requires that you create a merchant account with Google. You can do that here: <a href="https://developers.google.com/commerce/wallet/digital/training/getting-started/merchant-setup">https://developers.google.com/commerce/wallet/digital/training/getting-started/merchant-setup</a></li>
-	<li><strong>Stripe</strong>. This payment method allows you to embed their API on a websites to accept payments, without the need of getting a merchant account. Stripe has no setup fees, monthly fees, minimum charges, validation fees, card storage fees, or charges for failed payments. Stripe has a 7-day waiting period for transactions to be completed so that Stripe can profile the businesses involved and detect fraud. <a href="https://stripe.com/">https://stripe.com</a></li>
+	<li><strong>Stripe</strong>. This payment method allows you to embed 
+their API on a websites to accept payments, without the need of getting a
+ merchant account. Stripe has no setup fees, monthly fees, minimum 
+charges, validation fees, card storage fees, or charges for failed 
+payments. Stripe has a 7-day waiting period for transactions to be 
+completed so that Stripe can profile the businesses involved and detect 
+fraud. <a href="https://stripe.com/">https://stripe.com</a></li>
 </ol>
 
-<p>Our <strong>DataService</strong> will be used by the <strong>storeController</strong> to display the various views in the application. The <strong>storeController</strong> retrieves the store and cart from the <strong>DataService</strong> and adds them to the AngularJS <strong>$scope</strong> object which functions as a data context for the views. The <strong>storeController</strong> is where we can set the currentPage, the number of products per page and the maximum number of products used for our Pagination.</p>
+<p>Our <strong>DataService</strong> will be used by the <strong>storeController</strong> to display the various views in the application. The <strong>storeController</strong> retrieves the store and cart from the <strong>DataService</strong> and adds them to the AngularJS <strong>$scope</strong> object which functions as a data context for the views. The <strong>storeController</strong>
+ is where we can set the currentPage, the number of products per page 
+and the maximum number of products used for our Pagination.</p>
 
 <pre>// the storeController contains two objects:
 // store: contains the product list
@@ -298,7 +345,7 @@ function storeController($scope, $filter, $routeParams, DataService) {
         $scope.isActive = !$scope.isActive;
 
         <strong>// Let's flip our icons.
-        // <a class="cbp-vm-icon cbp-vm-grid cbp-vm-selected" data-view="cbp-vm-view-grid" href="http://www.codeproject.com/KB/HTML/#">Grid View</a> &lt;===&gt; <a class="cbp-vm-icon cbp-vm-list" data-view="cbp-vm-view-list" href="http://www.codeproject.com/KB/HTML/#">List View</a></strong>
+        // <a class="cbp-vm-icon cbp-vm-grid cbp-vm-selected" data-view="cbp-vm-view-grid" href="#">Grid View</a> &lt;===&gt; <a class="cbp-vm-icon cbp-vm-list" data-view="cbp-vm-view-list" href="#">List View</a></strong>
         if (section.class.toString() === 'cbp-vm-icon cbp-vm-grid') {
             $scope.sections = [{ name: 'list', class: 'cbp-vm-icon cbp-vm-list'}];
         }
@@ -430,18 +477,27 @@ function storeController($scope, $filter, $routeParams, DataService) {
     ...
 </pre>
 
-<hr>
 <h2 id="sec5">The 'shoppingCart' class</h2>
 
-<p>The <strong>shoppingCart</strong> class implements the object model, i.e., <strong>shoppingCart(cartName)</strong>, with a <strong>cartName</strong> parameter that identifies the cart when saving it to or loading it from local storage and exposes a number of essential methods.</p>
+<p>The <strong>shoppingCart</strong> class implements the object model, i.e., <strong>shoppingCart(cartName)</strong>, with a <strong>cartName</strong>
+ parameter that identifies the cart when saving it to or loading it from
+ local storage and exposes a number of essential methods.</p>
 
 <h2 id="sec6">addCheckoutParameters(serviceName, merchantID, [options])</h2>
 
-<p>The <em> <strong>addCheckoutParameters(serviceName, merchantID, [options])</strong> </em>method initializes the cart by adding one or more payment providers using the that requires two parameters. The <strong>serviceName</strong> parameter is the payment provider to use. The <strong>merchantID</strong> parameter is the merchant account or gateway associated with the service. The <strong>options</strong> parameter defines additional provider-specific fields. In our example, we used this parameter to specify custom shipping methods associated with the Google checkout. Both PayPal and Google support a large number of optional parameters that you can use to customize the checkout process.</p>
+<p>The <em> <strong>addCheckoutParameters(serviceName, merchantID, [options])</strong> </em>method initializes the cart by adding one or more payment providers using the that requires two parameters. The <strong>serviceName</strong> parameter is the payment provider to use. The <strong>merchantID</strong> parameter is the merchant account or gateway associated with the service. The <strong>options</strong>
+ parameter defines additional provider-specific fields. In our example, 
+we used this parameter to specify custom shipping methods associated 
+with the Google checkout. Both PayPal and Google support a large number 
+of optional parameters that you can use to customize the checkout 
+process.</p>
 
 <h2 id="sec7">addItem(sku, name, price, quantity)</h2>
 
-<p>The <strong><em>additem(sku, name, price, quantity)</em></strong> method adds or removes items from the cart.&nbsp; If the cart already contains items with the given <strong>sku</strong>, then the quantity of that item is is increased or decresed by one. The item is automatically removed from the cart if the quantity reaches zero.&nbsp;&nbsp;If the cart does not contain items with the given <strong>sku</strong>, then a new item is created and added to the cart using the specified <strong>sku</strong>, <strong>name</strong>, <strong>price</strong>, and <strong>quantity</strong>. After the cart has been updated, it is automatically saved to local storage.</p>
+<p>The <strong><em>additem(sku, name, price, quantity)</em></strong> method adds or removes items from the cart.&nbsp; If the cart already contains items with the given <strong>sku</strong>,
+ then the quantity of that item is is increased or decresed by one. The 
+item is automatically removed from the cart if the quantity reaches 
+zero.&nbsp;&nbsp;If the cart does not contain items with the given <strong>sku</strong>, then a new item is created and added to the cart using the specified <strong>sku</strong>, <strong>name</strong>, <strong>price</strong>, and <strong>quantity</strong>. After the cart has been updated, it is automatically saved to local storage.</p>
 
 <h2 id="sec8">clearItems()</h2>
 
@@ -457,7 +513,9 @@ function storeController($scope, $filter, $routeParams, DataService) {
 
 <h2 id="sec11">checkout(serviceName, clearCart)</h2>
 
-<p>The <strong><em>checkout(serviceName, clearCart)</em></strong> method initiates a checkout transaction by building a form object and submitting it to the specified payment provider.&nbsp; If provided, the <strong>serviceName</strong> parameter must match one of the service names registered with calls to the <strong>addCheckoutParameters</strong> method. If omitted, the cart will use the first payment service registered. The <strong>clearCart</strong> parameter specifies whether the cart should be cleared after the <strong>checkout</strong> transaction is submitted.&nbsp; The <strong>checkout</strong> method is the most interesting in this class, and is listed below:</p>
+<p>The <strong><em>checkout(serviceName, clearCart)</em></strong> method
+ initiates a checkout transaction by building a form object and 
+submitting it to the specified payment provider.&nbsp; If provided, the <strong>serviceName</strong> parameter must match one of the service names registered with calls to the <strong>addCheckoutParameters</strong> method. If omitted, the cart will use the first payment service registered. The <strong>clearCart</strong> parameter specifies whether the cart should be cleared after the <strong>checkout</strong> transaction is submitted.&nbsp; The <strong>checkout</strong> method is the most interesting in this class, and is listed below:</p>
 
 <pre>// check out
 shoppingCart.prototype.checkout = function (serviceName, clearCart) {
@@ -550,9 +608,19 @@ See: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=p/pdn/howto_checkout-out
 
 <p>The <strong><em>shoppingCart.prototype.checkoutStripe = function (parms, clearCart) Cart) </em></strong> method also builds and submits a form, the only difference being the name and content of the fields. See: <a href="https://stripe.com/docs/checkout"> https://stripe.com/docs/checkout</a></p>
 
-<p>All of these checkout methods allow you to add custom fields specified in the <strong>optionsptions</strong> parameter of the cart’s <strong>addCheckoutParameters</strong> method. These custom fields can be used to specify things like return URLs, custom images for the cart on the server’s site, custom shipping rules and prices, etc.</p>
+<p>All of these checkout methods allow you to add custom fields specified in the <strong>optionsptions</strong> parameter of the cart’s <strong>addCheckoutParameters</strong>
+ method. These custom fields can be used to specify things like return 
+URLs, custom images for the cart on the server’s site, custom shipping 
+rules and prices, etc.</p>
 
-<p>When the <strong>checkout</strong> method submits the form, the user is taken to the appropriate site (PayPal or Google Wallet), where he can review the information about the items, update his own personal and credit card information, and finalize the transaction. All this happens outside the scope of the application. The payment provider will then use the information associated with the merchant id provided by the form to notify you of the transaction so you can collect the payment and ship the goods to the customer.</p>
+<p>When the <strong>checkout</strong> method submits the form, the user 
+is taken to the appropriate site (PayPal or Google Wallet), where he can
+ review the information about the items, update his own personal and 
+credit card information, and finalize the transaction. All this happens 
+outside the scope of the application. The payment provider will then use
+ the information associated with the merchant id provided by the form to
+ notify you of the transaction so you can collect the payment and ship 
+the goods to the customer.</p>
 
 <p>If you wanted to add more payment options to the cart, you would have to:</p>
 
@@ -562,7 +630,13 @@ See: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=p/pdn/howto_checkout-out
 	<li>Modify the <strong>checkout</strong> method to call the new method depending on the service name specified by the user.</li>
 </ol>
 
-<p>For example, if you wanted to leverage an existing payment infrastructure you have on your site, you could create a method similar to <strong>checkoutPayPal</strong>, but with a URL on your site. The server would receive the form with all the information encoded as hidden fields, and would have access to the current session, user, etc. At this point, you would have all the information required by your payment infrastructure (cart and user).</p>
+<p>For example, if you wanted to leverage an existing payment 
+infrastructure you have on your site, you could create a method similar 
+to <strong>checkoutPayPal</strong>, but with a URL on your site. The 
+server would receive the form with all the information encoded as hidden
+ fields, and would have access to the current session, user, etc. At 
+this point, you would have all the information required by your payment 
+infrastructure (cart and user).</p>
 
 <h2 id="sec12">AngularJS Views</h2>
 
@@ -582,24 +656,42 @@ See: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=p/pdn/howto_checkout-out
 	<li>The <strong>“ng-app”</strong> attribute associates the page with the <strong>AngularStore</strong> module defined in the <strong>app.js</strong> file. This attribute takes care of the URL routing, view injection, and providing each view with the appropriate controllers.</li>
 	<li>The <strong>“ng-view”</strong> div marks the place where <strong>AngularJS</strong> will inject the partial pages that correspond to the routed views. Recall that our application has three partial pages: <strong>store.htm</strong>, <strong>product.htm</strong>, and <strong>shoppingCart.htm</strong>.</li>
 	<li>The parts of the page around the <strong>“ng-view”</strong> div remain in place as you switch views, acting as a master page. In this sample, this area shows the app logo and a title.</li>
-	<li>The sample application uses <strong>Bootstrap</strong>, twitter’s public framework that includes powerful and easy to use css styles. Bootstrap makes it easy to create adaptive layouts that work well on the desktop and on mobile devices (for details, see <a href="http://twitter.github.io/bootstrap/">http://twitter.github.io/bootstrap/</a>).</li>
+	<li>The sample application uses <strong>Bootstrap</strong>, twitter’s 
+public framework that includes powerful and easy to use css styles. 
+Bootstrap makes it easy to create adaptive layouts that work well on the
+ desktop and on mobile devices (for details, see <a href="http://twitter.github.io/bootstrap/">http://twitter.github.io/bootstrap/</a>).</li>
 </ol>
 
-<p>The <strong>store.htm</strong> partial view uses the <strong>getTotalCount</strong> and <strong>getTotalPrice</strong> methods to retrieve the cart information. Clicking this element redirects the browser to “default.htm#/cart”, which shows the shopping cart. <strong>Bootstrap</strong> includes a set of 140 icons that cover a lot of common scenarios (see the complete list here: <a href="http://twitter.github.io/bootstrap/base-css.html#icons">http://twitter.github.io/bootstrap/base-css.html#icons</a>).</p>
+<p>The <strong>store.htm</strong> partial view uses the <strong>getTotalCount</strong> and <strong>getTotalPrice</strong>
+ methods to retrieve the cart information. Clicking this element 
+redirects the browser to “default.htm#/cart”, which shows the shopping 
+cart. <strong>Bootstrap</strong> includes a set of 140 icons that cover a lot of common scenarios (see the complete list here: <a href="http://twitter.github.io/bootstrap/base-css.html#icons">http://twitter.github.io/bootstrap/base-css.html#icons</a>).</p>
 
-<p>The body of the layout uses an <strong>ng-repeat</strong> attribute to show a sorted, filtered list of all products. Each product row contains an image, a description that is also a link to the product details view, the product price, and a link that adds the product to the shopping cart. Adding items to the cart is accomplished by using the <strong>“ng-click”</strong> attribute to invoke the cart’s <strong>addItem</strong> method.</p>
+<p>The body of the layout uses an <strong>ng-repeat</strong> attribute 
+to show a sorted, filtered list of all products. Each product row 
+contains an image, a description that is also a link to the product 
+details view, the product price, and a link that adds the product to the
+ shopping cart. Adding items to the cart is accomplished by using the <strong>“ng-click”</strong> attribute to invoke the cart’s <strong>addItem</strong> method.</p>
 
 <p>The “orderBy” and “filter” clauses are filters provided by <strong>AngularJS</strong>. You can learn more about AngularJS filters here: <a href="http://egghead.io/video/rough-draft-angularjs-built-in-filters/">http://egghead.io/video/rough-draft-angularjs-built-in-filters/</a></p>
 
-<p>The last row is a copy of the first. It shows another summary of the cart below the product list, making navigation easier in stores that have a lot of products.</p>
+<p>The last row is a copy of the first. It shows another summary of the 
+cart below the product list, making navigation easier in stores that 
+have a lot of products.</p>
 
 <p>The <strong>product.htm</strong> partial view is very similar, as is the shopping cart itself, in <strong>shoppingCart.htm.</strong></p>
 
 <p>The item quantity is shown using a composite element made up of an input field bound to the <strong>item.quantity</strong> property and two buttons used to increment or decrement the quantity.</p>
 
-<p>Notice how the <strong>“ng-change”</strong> attribute is used to save the cart contents when the quantity changes. Notice also how the decrement button is disabled when the item quantity reaches one. At this point, decrementing the quantity would remove the item from the cart, and we don’t want users to do that by accident.</p>
+<p>Notice how the <strong>“ng-change”</strong> attribute is used to save
+ the cart contents when the quantity changes. Notice also how the 
+decrement button is disabled when the item quantity reaches one. At this
+ point, decrementing the quantity would remove the item from the cart, 
+and we don’t want users to do that by accident.</p>
 
-<p>After the quantity field, the table shows the total price of the item (unit price times quantity) and a button that allows users to remove the item from the cart.</p>
+<p>After the quantity field, the table shows the total price of the item
+ (unit price times quantity) and a button that allows users to remove 
+the item from the cart.</p>
 
 <p>The “clear cart” button invokes the cart’s <strong>clearItems</strong> method, and is enabled only if the cart is not already empty.</p>
 
@@ -641,26 +733,35 @@ See: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=p/pdn/howto_checkout-out
 &lt;/p&gt;
 </pre>
 
-<p>These buttons provides the same cart checkout services, but use images provided by PayPal and Google. Personally, I think the provider buttons may look a little less consistent on the page, but provide a familiar feeling to the user.</p>
+<p>These buttons provides the same cart checkout services, but use 
+images provided by PayPal and Google. Personally, I think the provider 
+buttons may look a little less consistent on the page, but provide a 
+familiar feeling to the user.</p>
 
-<p>The nice thing about <strong>Bootstrap’s</strong> layout mechanism is that it is ‘adaptive’. If you view the page on mobile devices, the layout automatically adapts to the screen width. The screenshots below illustrate this. The image on the left shows a wide view, with buttons on the right of the items (typical desktop view). The image on the right shows a narrow view, with buttons below the items (typical mobile view).</p>
-
-<table>
-	<tbody>
-		<tr>
-			<td><img height="405px" src="./article_files/shoppingcart1.jpg" width="550px">&nbsp; &nbsp;</td>
-			<td><img height="405px" src="./article_files/mobilecart.jpg" width="210px"></td>
-		</tr>
-	</tbody>
-</table>
+<p>The nice thing about <strong>Bootstrap’s</strong> layout mechanism is
+ that it is ‘adaptive’. If you view the page on mobile devices, the 
+layout automatically adapts to the screen width. The screenshots below 
+illustrate this. The image on the left shows a wide view, with buttons 
+on the right of the items (typical desktop view). The image on the right
+ shows a narrow view, with buttons below the items (typical mobile 
+view).</p>
 
 <h2 id="sec13">Conclusion</h2>
 
 <p>I can recommend a series of videos on AngularJS created by John Lindquist which you can find here: <a href="http://www.youtube.com/user/johnlindquist">http://www.youtube.com/user/johnlindquist</a>.</p>
 
-<p>I also like <strong>Bootstrap</strong>, because it makes it easy to create attractive, responsive HTML layouts. In addition to a nice set of styles and icons, <strong>Bootstrap</strong> also provides some JavaScript components that you can use to enhance your UIs with things like tooltips, pop-overs, menus, etc. You can learn about <strong>Bootstrap</strong> here: <a href="http://twitter.github.io/bootstrap/">http://twitter.github.io/bootstrap/</a>.</p>
+<p>I also like <strong>Bootstrap</strong>, because it makes it easy to create attractive, responsive HTML layouts. In addition to a nice set of styles and icons, <strong>Bootstrap</strong>
+ also provides some JavaScript components that you can use to enhance 
+your UIs with things like tooltips, pop-overs, menus, etc. You can learn
+ about <strong>Bootstrap</strong> here: <a href="http://twitter.github.io/bootstrap/">http://twitter.github.io/bootstrap/</a>.</p>
 
-<p>There are a number of additional features I plan on adding in the next week or so like a nice-looking Dialog for display images in a variety of different ways, additional Pinterest styled Layouts to work better with AngularJS, more features to aid product displays and selling, and many more goodies. &nbsp;And I will also be posting a version of this shopping cart written using AngularJS 2.0 in the next few weeks.&nbsp;<br>
+<p>There are a number of additional features I plan on adding in the 
+next week or so like a nice-looking Dialog for display images in a 
+variety of different ways, additional Pinterest styled Layouts to work 
+better with AngularJS, more features to aid product displays and 
+selling, and many more goodies. &nbsp;And I will also be posting a 
+version of this shopping cart written using AngularJS 2.0 in the next 
+few weeks.&nbsp;<br>
 <br>
 You can always get the latest cod efor this project on my website at: <a href="http://www.software-rus.com/">www.Software-rus.com</a></p>
 

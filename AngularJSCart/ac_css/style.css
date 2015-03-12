@@ -34,8 +34,8 @@ html {
 }
 
 .modal-body {
-  height:400px;
-  max-height:400px;
+  height:300px;
+  max-height:300px;
 }
 
 .modal {
@@ -150,3 +150,5 @@ img {vertical-align:top;padding-top:0px;}
         color:#4c3f3d;
         font-size: 14px;
       }
+
+ 

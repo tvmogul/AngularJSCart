@@ -81,6 +81,38 @@ shoppingCart.prototype.addItem = function (sku, productname, unitprice, quantity
     }
 }
 
+// adds an item to the cart from non-angular page using url parameters
+shoppingCart.prototype.addItemUrl = function (sku, productname, unitprice, quantity) {
+    var quantity = this.toNumber(quantity);
+    var unitprice = this.toNumber(unitprice);
+    if (unitprice > 0) {
+        // update quantity for existing item
+        var found = false;
+        for (var i = 0; i < this.items.length && !found; i++) {
+            var item = this.items[i];
+            if (item.sku == sku) {
+                found = true;
+                //item.quantity = this.toNumber(item.quantity + quantity);
+                //if (item.quantity <= 0) {
+                //    this.items.splice(i, 1);
+                //}
+            }
+        }
+
+        // new item, add now
+        if (!found) {
+            var item = new cartItem(sku, productname, unitprice, quantity);
+            this.items.push(item);
+        }
+
+        // save changes
+        this.saveItems();
+    }
+    else {
+        alert("It's FREE, no need to add to cart!");
+    }
+}
+
 // get the total price for all items currently in the cart
 shoppingCart.prototype.getTotalPrice = function (sku) {
     var total = 0;

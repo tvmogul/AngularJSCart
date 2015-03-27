@@ -1,11 +1,11 @@
-﻿
-  <div id="store" class="content col-md-12" style="overflow: hidden;">    
-    <form class="form-search"> 
+
+<div id="store" class="content col-md-12" style="overflow: hidden;" ng-controller="storeController">
+    <form class="form-search">
         <div class="col-md-12 store-cart-content">
-            <div class="content-store col-md-5" >
-                <a href="storefront.html#/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+            <div class="content-store col-md-5">
+                <a href="storefront.html#/cart" title="proceed to shopping cart" ng-disabled="cart.getTotalCount() < 1">
                     <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
-                    <div class="btn btn-cart" ng-click="storefront.html#/cart">go to<img src="ac_img/cart.png" alt="" /></div>
+                    <div class="btn btn-split" ng-click="storefront.html#/cart">proceed to &nbsp;<img class="split_btn" src="ac_img/cart.png" alt="" /></div>
                 </a>
 
             </div>
@@ -15,92 +15,120 @@
                     <li ng-repeat="section in sections">
                         <!--<a ng-href="#" class="cbp-vm-icon cbp-vm-grid cbp-vm-selected" data-view="cbp-vm-view-grid">Grid View</a>
                         <a ng-href="#" class="cbp-vm-icon cbp-vm-list" data-view="cbp-vm-view-list">List View</a>-->
-                        <a class="cbp-vm-icon cbp-vm-grid {{section.class}}" ng-class="{cbpvmselected : isSelected(section)}"  ng-click="setMaster(section)">{{section.name}}</a>
-                    </li>  
+                        <a class="cbp-vm-icon cbp-vm-grid {{section.class}}" ng-class="{cbpvmselected : isSelected(section)}" ng-click="setMaster(section)">{{section.name}}</a>
+                    </li>
                 </ul>
             </div>
 
         </div>
         <div class="col-md-12 store-button-top">
-                <table style="float:right;">
-                    <tr>
-                        <td><button class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><</button></td>
-                        <td><p>&nbsp;&nbsp;{{currentPage + 1}}/{{numberOfPages()}}&nbsp;&nbsp;</p></td>
-                        <td><button class="btn" ng-disabled="currentPage >= store.products.length/pageSize - 1" ng-click="currentPage=currentPage+1">></button></td>
-                    </tr>
-                </table>                            
+            <table style="float:right;">
+                <tr>
+                    <td><button class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><</button></td>
+                    <td><p>&nbsp;&nbsp;{{currentPage + 1}}/{{pageCount()}}&nbsp;&nbsp;</p></td>
+                    <td><button class="btn" ng-disabled="currentPage >= store.products.length/pageSize - 1" ng-click="currentPage=currentPage+1">></button></td>
+                </tr>
+            </table>
 
 
             <div class="content-search">
                 <input type="text" ng-model="query" ng-change="search('productname')" class="search-query" placeholder="Search">
             </div>
             <div class="filter-button-top">
-                <button class="btn flr-top-first" ng-click="myFilter('categoryname',null)">All</button>
-                <button class="btn flr-top" ng-click="myFilter('categoryname','software')">Software</button>
-                <button class="btn flr-top" ng-click="myFilter('categoryname','cool')">Cool</button>
-                <button class="btn flr-top flr-last" ng-click="myFilter('categoryname','course')">Courses</button>
+                <button class="btn flr-top-first" ng-click="filterCategory('categoryname',null)">All</button>
+                <button class="btn flr-top" ng-click="filterCategory('categoryname','software')">Software</button>
+                <button class="btn flr-top" ng-click="filterCategory('categoryname','cool')">Cool</button>
+                <button class="btn flr-top flr-last" ng-click="filterCategory('categoryname','course')">Courses</button>
             </div>
 
         </div>
         <div class="clear"></div>
         <div id="cbp-vm" class="cbp-vm-switcher" ng-class="{true: '', false: 'activegrid'}[isActive]">
-        <ul id="product" class="nav-pills nav-stacked rectangle-list">
-            <li ng-animate="'animate'" ng-repeat="product in pagedItems[currentPage] | filter:query | orderBy:'sortorder'">
+            <ul id="product" class="nav-pills nav-stacked rectangle-list">
+                <li ng-animate="'animate'" ng-repeat="product in pagedItems[currentPage] | filter:query | orderBy:'sortorder'">
 
-                <div ng-show="product.showvideo < 1">
-                    <!--USE THIS TO POPUP MODAL DIALOG: <a href="#" ng-click="launchSimpleModal(product)"><img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" class="imgcart" /></a><br />-->
-                    <img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" class="imgcart" /><br />
-                </div>
-
-                <div ng-show="product.showvideo > 0" class="video-wrapper">
-                    <div class="video-container">
-                        <iframe width="300" height="280" src="http://www.youtube.com/embed/{{product.videoid}}" frameborder="0" allowfullscreen></iframe><br />
+                    <div ng-show="product.showvideo < 1">
+                        <!--USE THIS TO POPUP MODAL DIALOG: 
+                            <a href="#" ng-click="launchSimpleModal(product)"><img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" class="imgcart" /></a><br />
+                        -->
+                        <img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" class="imgcart" /><br />
                     </div>
+
+                    <div ng-show="product.showvideo > 0" class="video-wrapper">
+                        <div my-youtube code="product.videoid"></div>
+                    </div>
+
+                    <div style="padding-bottom: 2px !important;"></div>
+
+                    <a class="ztitle" href="#/products/{{product.sku}}"><span ng-bind-html="product.productname | unsafe"></span></a>
+                    <p class="zdescription" ng-bind-html="product.shortdesc | unsafe"></p>
+
+
+                    <a href="" ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)">
+                        <div class="btn btn-cart">Add cart</div>
+                    </a>
+
+
+
+
+
+                    <a class="details-button" ng-href="#/products/{{product.sku}}">
+                        <div class="btn btn-cart">Details</div>
+                    </a>
+                    <span class="categoryname" href="#">{{product.categoryname}}</span>
+                    <p class="content_price">{{product.unitprice | currency}}
+                        <span ng-show="cart.getTotalCount(product.sku) > 0"><i class="fa fa-check"></i>{{cart.getTotalCount(product.sku)}}</span>
+                    </p>
+                    <div ng-show="product.link.length > 0">
+                        <a href="{{product.link}}" target="_blank"><span class="btn btn-custom">{{product.linktext}}</span></a>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            </ul>
+
+            <div class="col-md-12 store-cart-content store-cart-footer">
+                <div class="content-store col-md-5">
+                    <a href="storefront.html#/cart" title="proceed to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                        <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+                        <div class="btn btn-split" ng-click="storefront.html#/cart">proceed to<img src="ac_img/cart.png" alt="" /></div>
+                    </a>
                 </div>
-
-                <div style="padding-bottom: 2px !important;"></div>
-
-                <a class="ztitle" href="#/products/{{product.sku}}"><span ng-bind-html-unsafe="product.productname"></span></a>
-                <p class="zdescription" ng-bind-html-unsafe="product.shortdesc"></p>
-
-
-                <a href="" ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)">
-                    <div class="btn btn-cart">Add cart</div>
-                </a>
-                <a class="details-button" href="#/products/{{product.sku}}">
-                    <div class="btn btn-cart">Details</div>
-                </a>
-                <a class="categoryname" href="#">{{product.categoryname}}</a>
-                <p class="content_desc">
-                    {{product.unitprice | currency}}
-                    <span ng-show="cart.getTotalCount(product.sku) > 0"><i class="fa fa-check"></i>{{cart.getTotalCount(product.sku)}}</span>
-                </p>
-                <div ng-show="product.link.length > 0">
-                    <p style=" text-align:left;"><a href="{{product.link}}" target="_blank"><span class="btn btn-custom">{{product.linktext}}</span></a></p>
+                <div class="col-md-5 store-down-bottom">
+                    <table style="float:right;">
+                        <tr>
+                            <td><button class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><</button></td>
+                            <td><p>&nbsp;&nbsp;{{currentPage + 1}}/{{pageCount()}}&nbsp;&nbsp;</p></td>
+                            <td><button class="btn" ng-disabled="currentPage >= store.products.length/pageSize - 1" ng-click="currentPage=currentPage+1">></button></td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="clear"></div>
-            </li> 
-        </ul>
+            </div>
 
-        <div class="col-md-12 store-cart-content store-cart-footer">
-            <div class="content-store col-md-5" >
-                <a href="storefront.html#/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
-                    <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
-                    <div class="btn btn-cart" ng-click="storefront.html#/cart">go to<img src="ac_img/cart.png" alt="" /></div>
-                </a>
-            </div>
-            <div class="col-md-5 store-down-bottom">
-                <table style="float:right;">
-                    <tr>
-                        <td><button class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><</button></td>
-                        <td><p>&nbsp;&nbsp;{{currentPage + 1}}/{{numberOfPages()}}&nbsp;&nbsp;</p></td>
-                        <td><button class="btn" ng-disabled="currentPage >= store.products.length/pageSize - 1" ng-click="currentPage=currentPage+1">></button></td>
-                    </tr>
-                </table>                            
-            </div>
         </div>
-
-    </div>
     </form>
-  </div>
+</div>
+
+
+<!--As mentioned before, in AngularJS 1.2 or AngularJS 1.3, this could no longer be done. 
+You now have to use $sce to run your output through a filter, which you can specify to allow the HTML.
+We can implement this using $sce.trustAsHtml() by adding a filter to our code (outside of the controller).
+This custom filter will make sure that our HTML doesn’t get filtered out by AngularJS 1.2/AngularJS 1.3 or later
+We will name this filter “unsafe”. It gets passed a value, which we will return as trusted HTML output.
+
+commentApp.filter('unsafe', function($sce) {
+    return function(val) {
+        return $sce.trustAsHtml(val);
+    };
+});
+
+Now, modify your HTML code from this:
+<p>
+  {{comment.text}}
+</p>
+And change it to this:
+<p ng-bind-html="comment.text | unsafe"></p>
+This will run your comment.text through the “unsafe” filter we just created, and once again, your output will have the HTML parsed properly.-->
+
+
+
 

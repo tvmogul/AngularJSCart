@@ -1,67 +1,64 @@
-﻿<div id="prod-top" class="prod-top-img col-md-12">
- <div class="cart-txt-top">
- 
-    <div ng-show="product.imagename.length > 1">
-            <img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" style="padding-right:20px !important;" /><br />
-    </div>
+﻿<div id="store" class="content col-md-12" style="overflow: hidden;">
 
-     <div ng-show="product.showvideo > 0 && product.imagename.length < 1" class="video-wrapper">
-         <div class="video-container">
-             <iframe width="300" height="280" src="http://www.youtube.com/embed/{{product.videoid}}" frameborder="0" allowfullscreen></iframe><br />
-         </div>
-     </div>
+    <div id="prod-top" class="prod-top-img col-md-12">
+        <div class="cart-txt-top">
 
-    <span style="font-family:Arial Black;font-size:1.8em;font-weight:bold;" ng-bind-html-unsafe="product.productname"></span><br />
-     <!--  <span class="product-name" ng-bind-html-unsafe="product.productname"></span><br /> -->
-       <p class="product-desc" ng-bind-html-unsafe="product.description"></p><br />
+            <div ng-show="product.imagename.length > 1">
+                <img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" style="padding-right:20px !important;" /><br />
+            </div>
 
-  </div>
-</div>
-<div class="clear"></div>
-<div class="container-fluid">
-    <div class="row-fluid content-backcolor">
-        <div class="col-md-8">
+            <div ng-show="product.showvideo > 0 && product.imagename.length < 1" class="video-wrapper">
+                <div my-youtube code="product.videoid"></div>
+            </div>
 
-            <!-- product info -->
-            <table class="table table-bordered">
-                <tr class="well">
-                    <td class="tdRight" colspan="3" >
-                        <a href="storefront.html#/cart" class="cart-txt-color" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
-                            <img src="ac_img/cart.png" alt="" />
-                            <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
-                            <span class="txt-cart-prod" ng-show="cart.getTotalCount(product.sku) > 0"><br />this item is in the cart</span>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdRight detail-img">
-                        <!--<img ng-src="ac_products/details/{{product.imagename}}" alt=""/>-->
-                    </td>
-                    <td class="tdRight detail-title"><p ng-bind-html-unsafe="product.productname"></p></td>
-                    <td class="tdCenter detail-desc"><p ng-bind-html-unsafe="product.categoryname"></p></td>
-                </tr>
-            </table>
-        </div>
+            <span style="font-family:Arial Black;font-size:1.8em;font-weight:bold;" ng-bind-html-unsafe="product.productname"></span><br />
+            <p class="product-desc" ng-bind-html="product.description | unsafe"></p><br />
 
-        <!-- buttons -->
-        <div class="col-md-4">
-            <button 
-                class="btn btn-block btn-success" 
-                ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)">
-                <i class="icon-shopping-cart icon-white" /> add to cart
-            </button>
-            <button 
-                class="btn btn-block btn-danger" 
-                ng-click="cart.addItem(product.sku, product.productname, product.unitprice, -10000)"
-                ng-disabled="cart.getTotalCount(product.sku) < 1">
-                <i class="icon-trash icon-white" /> remove from cart
-            </button>
-            <button 
-                class="btn btn-block" 
-                onclick="window.location.href=''">
-                <i class="icon-chevron-left" /> back to store
-            </button>
         </div>
     </div>
-</div>
+    <div class="clear"></div>
+    <div class="container-fluid">
+        <div class="row-fluid content-backcolor">
+            <div class="col-md-8">
 
+                <!-- product info -->
+                <table class="table table-bordered">
+                    <tr class="well">
+                        <td class="tdRight" colspan="3">
+                            <a href="storefront.html#/cart" class="cart-txt-color" title="proceed to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                                <img src="ac_img/cart.png" alt="" />
+                                <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+                                <span class="txt-cart-prod" ng-show="cart.getTotalCount(product.sku) > 0"><br />this item is in the cart</span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdRight detail-img">
+                            <!--<img ng-src="ac_products/details/{{product.imagename}}" alt=""/>-->
+                        </td>
+                        <td class="tdRight detail-title"><p ng-bind-html="product.productname | unsafe"></p></td>
+                        <td class="tdCenter detail-desc"><p ng-bind-html="product.categoryname | unsafe"></p></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- buttons -->
+            <div class="col-md-4">
+                <button class="btn btn-block btn-success"
+                        ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)">
+                    <i class="icon-shopping-cart icon-white" /> add to cart
+                </button>
+                <button class="btn btn-block btn-danger"
+                        ng-click="cart.addItem(product.sku, product.productname, product.unitprice, -10000)"
+                        ng-disabled="cart.getTotalCount(product.sku) < 1">
+                    <i class="icon-trash icon-white" /> remove from cart
+                </button>
+                <button class="btn btn-block"
+                        onclick="window.location.href=''">
+                    <i class="icon-chevron-left" /> back to store
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

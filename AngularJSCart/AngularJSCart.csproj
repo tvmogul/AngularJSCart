@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3DCD98A2-C930-4B68-8971-33A25997AE95}</ProjectGuid>
+    <ProjectGuid>{263AE487-F731-492A-9F7C-0FD1D540C789}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AngularJSCart</RootNamespace>
-    <AssemblyName>AngularJSCart</AssemblyName>
+    <RootNamespace>Blank</RootNamespace>
+    <AssemblyName>Blank</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ac_css\ac_doc.css" />
     <Content Include="ac_css\bootstrap-theme.css" />
     <Content Include="ac_css\bootstrap-theme.min.css" />
     <Content Include="ac_css\bootstrap.css" />
@@ -73,6 +74,7 @@
     <Content Include="ac_css\navbar_dkred_gradient.css" />
     <Content Include="ac_css\navbar_gray_gradient.css" />
     <Content Include="ac_css\pinboard.css" />
+    <Content Include="ac_css\sticky.css" />
     <Content Include="ac_css\style.css" />
     <Content Include="ac_img\10_megavideo.png" />
     <Content Include="ac_img\11_yklogo.png" />
@@ -95,11 +97,11 @@
     <Content Include="ac_img\bg6.jpg" />
     <Content Include="ac_img\bg7.jpg" />
     <Content Include="ac_img\bg8.jpg" />
-    <Content Include="ac_img\bg9.jpg" />
     <Content Include="ac_img\cart.png" />
     <Content Include="ac_img\ck_out_google_wallet.png" />
     <Content Include="ac_img\ck_out_paypal.png" />
     <Content Include="ac_img\ck_out_stripe.png" />
+    <Content Include="ac_img\favicon.ico" />
     <Content Include="ac_img\logo.png" />
     <Content Include="ac_img\logo2.png" />
     <Content Include="ac_img\nb_black.png" />
@@ -108,8 +110,10 @@
     <Content Include="ac_img\nb_gray.png" />
     <Content Include="ac_img\nb_red.png" />
     <Content Include="ac_img\stripeCardPayments_blog2.jpg" />
-    <Content Include="ac_js\analyticsService.js" />
-    <Content Include="ac_js\angular.js" />
+    <Content Include="ac_js\angular-resource.1.3.15.min.js" />
+    <Content Include="ac_js\angular-route.1.3.15.min.js" />
+    <Content Include="ac_js\angular.1.3.15.min.js" />
+    <Content Include="ac_js\angular.1.4.0.min.js" />
     <Content Include="ac_js\app.js" />
     <Content Include="ac_js\bootstrap.js" />
     <Content Include="ac_js\bootstrap.min.js" />
@@ -118,19 +122,18 @@
     <Content Include="ac_js\jquery.blockUI.min.js" />
     <Content Include="ac_js\jquery.form.js" />
     <Content Include="ac_js\shoppingCart.js" />
-    <Content Include="ac_js\ui-bootstrap-tpls-0.12.1.min.js" />
-    <Content Include="ac_js\ui-bootstrap.min.js" />
-    <Content Include="ac_js\video.js" />
     <Content Include="ac_partials\cart.htm" />
     <Content Include="ac_partials\product.htm" />
     <Content Include="ac_partials\store.htm" />
     <Content Include="ac_products\baby-mop.png" />
+    <Content Include="ac_products\config.js" />
     <Content Include="ac_products\contracts.png" />
     <Content Include="ac_products\domaingenie.png" />
     <Content Include="ac_products\finger_usb.jpg" />
     <Content Include="ac_products\hammer.gif" />
     <Content Include="ac_products\high_power_telsa.jpg" />
     <Content Include="ac_products\internet_course.png" />
+    <Content Include="ac_products\jsoneditor.jpg" />
     <Content Include="ac_products\kitty_toilet_trainer.jpg" />
     <Content Include="ac_products\lifestraw.jpg" />
     <Content Include="ac_products\maxpay.png" />
@@ -143,9 +146,6 @@
     <Content Include="ac_products\watch_camera.jpg" />
     <Content Include="ac_products\wildworkout.png" />
     <Content Include="ac_products\ww.gif" />
-    <Content Include="ac_products\zTzaskbarNotifiers4.gif" />
-    <Content Include="ac_products\zzzproducts.txt" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="storefront.html" />
     <Content Include="Web.config" />
@@ -154,8 +154,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ac_css\bootstrap-theme.css.map" />
-    <Content Include="ac_css\bootstrap.css.map" />
     <Content Include="ac_css\font-awesome-4.3.0\fonts\fontawesome-webfont.eot" />
     <Content Include="ac_css\font-awesome-4.3.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="ac_css\font-awesome-4.3.0\fonts\fontawesome-webfont.woff" />
@@ -187,13 +185,15 @@
     <Content Include="ac_css\font-awesome-4.3.0\scss\_rotated-flipped.scss" />
     <Content Include="ac_css\font-awesome-4.3.0\scss\_stacked.scss" />
     <Content Include="ac_css\font-awesome-4.3.0\scss\_variables.scss" />
-    <Content Include="fonts\BebasNeuewebfont.woff" />
+    <Content Include="ac_css\bootstrap-theme.css.map" />
+    <Content Include="ac_css\bootstrap.css.map" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\quicksand-regular.woff" />
+    <Content Include="ac_js\angular-route.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -215,9 +215,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>26144</DevelopmentServerPort>
+          <DevelopmentServerPort>2215</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:26144/</IISUrl>
+          <IISUrl>http://localhost:2215/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

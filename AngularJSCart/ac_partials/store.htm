@@ -5,9 +5,10 @@
             <div class="content-store col-md-5">
                 <a href="storefront.html#/cart" title="proceed to shopping cart" ng-disabled="cart.getTotalCount() < 1">
                     <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
-                    <div class="btn btn-split" ng-click="storefront.html#/cart">proceed to &nbsp;<img class="split_btn" src="ac_img/cart.png" alt="" /></div>
+                    <div style="display:inline !important;">
+                        <span class="btn btn-xs btn-split">proceed to <img class="img-split" src="ac_img/cart.png" /></span>
+                    </div>
                 </a>
-
             </div>
 
             <div class="tabs-menu col-md-5" style="white-space:nowrap !important;">
@@ -90,7 +91,9 @@
                 <div class="content-store col-md-5">
                     <a href="storefront.html#/cart" title="proceed to shopping cart" ng-disabled="cart.getTotalCount() < 1">
                         <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
-                        <div class="btn btn-split" ng-click="storefront.html#/cart">proceed to<img src="ac_img/cart.png" alt="" /></div>
+                        <div style="display:inline !important;">
+                            <span class="btn btn-xs btn-split">proceed to <img class="img-split" src="ac_img/cart.png" /></span>
+                        </div>
                     </a>
                 </div>
                 <div class="col-md-5 store-down-bottom">

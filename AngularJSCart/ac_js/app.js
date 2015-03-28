@@ -293,7 +293,7 @@ storeApp.factory('DataService', function ($http, $q, CONFIG) {
     // create store
     var myStore = new Store();
 
-    // create shopping cart
+    // create shopping cart and pass in out CONFIG!!!
     var myCart = new shoppingCart("AngularStore", CONFIG);
 
     // enable PayPal checkout
@@ -515,6 +515,7 @@ storeApp.controller('DialogCtrl', ['$scope', 'createDialog', function ($scope, c
         });
     };
 }])
+
 
 angular.module('storeMessages.services', []).factory('createDialog', ["$document", "$compile", "$rootScope", "$controller", "$timeout",
   function ($document, $compile, $rootScope, $controller, $timeout) {

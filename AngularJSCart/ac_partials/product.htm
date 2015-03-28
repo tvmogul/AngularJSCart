@@ -3,15 +3,15 @@
     <div id="prod-top" class="prod-top-img col-md-12">
         <div class="cart-txt-top">
 
-            <div ng-show="product.imagename.length > 1">
+            <div ng-show="product.showvideo < 1">
                 <img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" style="padding-right:20px !important;" /><br />
             </div>
 
-            <div ng-show="product.showvideo > 0 && product.imagename.length < 1" class="video-wrapper">
+            <div ng-show="product.showvideo > 0" class="video-wrapper">
                 <div my-youtube code="product.videoid"></div>
             </div>
 
-            <span style="font-family:Arial Black;font-size:1.8em;font-weight:bold;" ng-bind-html-unsafe="product.productname"></span><br />
+            <span style="display: inline !important;font-family:Arial Black;font-size:1.8em;font-weight:bold;" ng-bind-html-unsafe="product.productname"></span><br />
             <p class="product-desc" ng-bind-html="product.description | unsafe"></p><br />
 
         </div>
@@ -26,9 +26,12 @@
                     <tr class="well">
                         <td class="tdRight" colspan="3">
                             <a href="storefront.html#/cart" class="cart-txt-color" title="proceed to shopping cart" ng-disabled="cart.getTotalCount() < 1">
-                                <img src="ac_img/cart.png" alt="" />
                                 <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
-                                <span class="txt-cart-prod" ng-show="cart.getTotalCount(product.sku) > 0"><br />this item is in the cart</span>
+                                <div style="display:inline !important;">
+                                    <span class="btn btn-xs btn-split">proceed to <img class="img-split" src="ac_img/cart.png" /></span>
+                                </div>
+                                <span class="txt-cart-prod" ng-show="cart.getTotalCount(product.sku) > 0"><br /><strong>this item is in the cart</strong></span>
+                                <span class="txt-cart-prod" ng-show="cart.getTotalCount(product.sku) < 1"><br /><strong>this item is NOT in the cart</strong></span>
                             </a>
                         </td>
                     </tr>

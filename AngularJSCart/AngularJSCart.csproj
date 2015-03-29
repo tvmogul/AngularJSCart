@@ -98,6 +98,7 @@
     <Content Include="ac_img\bg7.jpg" />
     <Content Include="ac_img\bg8.jpg" />
     <Content Include="ac_img\cart.png" />
+    <Content Include="ac_img\cc.png" />
     <Content Include="ac_img\ck_out_google_wallet.png" />
     <Content Include="ac_img\ck_out_paypal.png" />
     <Content Include="ac_img\ck_out_stripe.png" />

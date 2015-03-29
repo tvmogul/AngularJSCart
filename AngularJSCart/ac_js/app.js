@@ -89,7 +89,7 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
     */
     $scope.sections = [{ name: 'list', class: 'cbp-vm-icon cbp-vm-list' }];
 
-    $scope.setMaster = function (section) {
+    $scope.updateDisplay = function (section) {
         $scope.selected = section;
         $scope.isActive = !$scope.isActive;
 
@@ -163,8 +163,8 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
         }
 
         //////////////////////////////////////////////////////////////////////////////
-        // Author: Bill SerGio, The Infomercial King
-        // Substantially better than the TOTAL PIECE OF CRAP FUNCTION "getUrlVars" that throw errors like crazy!
+        // BILL SERGIO - Code below alows Links on NON-AngularJS websitesis to "add to cart" 
+        // The standard "getUrlVars" has a LOT of bugs but the code below works perfectly!
         // Given a query string "?to=email&why=because&first=John&Last=smith"
         // getUrlVar("to")  will return "email"
         // getUrlVar("last") will return "smith"
@@ -188,6 +188,10 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
                 }
             }
         }
+        var _distid = $scope.getUrlVar('distid');
+        if (_distid.length > 0) {
+            // Do something with _distid so you can pay the commissions you owe!
+        }
         //////////////////////////////////////////////////////////////////////////////
 
         /* AUTHOR: BILL SERGIO - the code for pagination comes DIRECTLY from:
@@ -196,6 +200,15 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
 
         $scope.pageCount = function () {
             return Math.ceil($scope.products.length / $scope.pageSize);
+        };
+
+        $scope.nextPage = function () {
+            if($scope.currentPage >= Math.ceil($scope.products.length / $scope.pageSize) - 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
         };
 
         //$scope.$watch('currentPage + pageSize', function () {
@@ -254,6 +267,15 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
 
 });
 
+//$scope.numPages = function () {
+//    return Math.ceil($scope.products.length / $scope.numPerPage);
+//};
+
+//$scope.$watch('currentPage + numPerPage', function () {
+//    var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+//    var end = begin + $scope.numPerPage;
+//    $scope.filteredProducts = $scope.products.slice(begin, end);
+//});
 
  // create a data service that provides a store and a shopping cart that
 // will be shared by all views (instead of creating fresh ones for each view).

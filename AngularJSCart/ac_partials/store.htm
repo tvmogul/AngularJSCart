@@ -1,4 +1,5 @@
 
+
 <div id="store" class="content col-md-12" style="overflow: hidden;" ng-controller="storeController">
     <form class="form-search">
         <div class="col-md-12 store-cart-content">
@@ -16,7 +17,7 @@
                     <li ng-repeat="section in sections">
                         <!--<a ng-href="#" class="cbp-vm-icon cbp-vm-grid cbp-vm-selected" data-view="cbp-vm-view-grid">Grid View</a>
                         <a ng-href="#" class="cbp-vm-icon cbp-vm-list" data-view="cbp-vm-view-list">List View</a>-->
-                        <a class="cbp-vm-icon cbp-vm-grid {{section.class}}" ng-class="{cbpvmselected : isSelected(section)}" ng-click="setMaster(section)">{{section.name}}</a>
+                        <a class="cbp-vm-icon cbp-vm-grid {{section.class}}" ng-class="{cbpvmselected : isSelected(section)}" ng-click="updateDisplay(section)">{{section.name}}</a>
                     </li>
                 </ul>
             </div>
@@ -27,7 +28,7 @@
                 <tr>
                     <td><button class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><</button></td>
                     <td><p>&nbsp;&nbsp;{{currentPage + 1}}/{{pageCount()}}&nbsp;&nbsp;</p></td>
-                    <td><button class="btn" ng-disabled="currentPage >= store.products.length/pageSize - 1" ng-click="currentPage=currentPage+1">></button></td>
+                    <td><button class="btn" ng-disabled="nextPage()" ng-click="currentPage=currentPage+1">></button></td>
                 </tr>
             </table>
 
@@ -49,7 +50,7 @@
                 <li ng-animate="'animate'" ng-repeat="product in pagedItems[currentPage] | filter:query | orderBy:'sortorder'">
 
                     <div ng-show="product.showvideo < 1">
-                        <!--USE THIS TO POPUP MODAL DIALOG: 
+                        <!--USE THIS TO POPUP MODAL DIALOG:
                             <a href="#" ng-click="launchSimpleModal(product)"><img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" class="imgcart" /></a><br />
                         -->
                         <img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" class="imgcart" /><br />
@@ -64,21 +65,19 @@
                     <a class="ztitle" href="#/products/{{product.sku}}"><span ng-bind-html="product.productname | unsafe"></span></a>
                     <p class="zdescription" ng-bind-html="product.shortdesc | unsafe"></p>
 
-
                     <a href="" ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)">
                         <div class="btn btn-cart">Add cart</div>
                     </a>
-
-
-
-
 
                     <a class="details-button" ng-href="#/products/{{product.sku}}">
                         <div class="btn btn-cart">Details</div>
                     </a>
                     <span class="categoryname" href="#">{{product.categoryname}}</span>
-                    <p class="content_price">{{product.unitprice | currency}}
-                        <span ng-show="cart.getTotalCount(product.sku) > 0"><i class="fa fa-check"></i>{{cart.getTotalCount(product.sku)}}</span>
+                    <p class="content_price">
+                        {{product.unitprice | currency}}
+                        <span ng-show="cart.getTotalCount(product.sku) > 0">
+                            <i class="fa fa-check-square-o"></i>{{cart.getTotalCount(product.sku)}}
+                        </span>
                     </p>
                     <div ng-show="product.link.length > 0">
                         <a href="{{product.link}}" target="_blank"><span class="btn btn-custom">{{product.linktext}}</span></a>
@@ -101,7 +100,7 @@
                         <tr>
                             <td><button class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><</button></td>
                             <td><p>&nbsp;&nbsp;{{currentPage + 1}}/{{pageCount()}}&nbsp;&nbsp;</p></td>
-                            <td><button class="btn" ng-disabled="currentPage >= store.products.length/pageSize - 1" ng-click="currentPage=currentPage+1">></button></td>
+                            <td><button class="btn" ng-disabled="nextPage()" ng-click="currentPage=currentPage+1">></button></td>
                         </tr>
                     </table>
                 </div>
@@ -110,6 +109,8 @@
         </div>
     </form>
 </div>
+
+
 
 
 <!--As mentioned before, in AngularJS 1.2 or AngularJS 1.3, this could no longer be done. 

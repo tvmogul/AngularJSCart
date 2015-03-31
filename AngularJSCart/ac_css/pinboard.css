@@ -1,17 +1,14 @@
 ﻿@import url(http://fonts.googleapis.com/css?family=Crafty+Girls|Poiret+One|Paytone+One|Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic|Anton|Shadows+Into+Light|Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic|Oswald:400,300,700|Oxygen:400,300,700|Francois+One|Nunito:400,300,700|Changa+One:400,400italic|Righteous|Shadows+Into+Light+Two|Passion+One:400,700,900|Archivo+Black|Scada:400italic,700italic,400,700);
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-@font-face {
-	font-family: 'BebasNeuewebfont';
-	src: url('../fonts/BebasNeuewebfont.eot');
-	src: local('BebasNeuewebfont'), url('fonts/BebasNeuewebfont.woff') format('woff'), url('fonts/BebasNeuewebfont.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'quicksand regular';
-    src: url("../fonts/quicksand-regular.eot");
-    src: url("../fonts/quicksand-regular.eot?#iefix") format("embedded-opentype"), url("fonts/quicksand-regular.woff") format("woff"), url("fonts/quicksand-regular.ttf") format("truetype"), url("fonts/quicksand-regular.svg#svgFontName") format("svg");
-}
 
-
+/*  Code here is from Codrops projects for ViewModeSwitch and their ResponsiveIconGrid at: 
+    https://github.com/codrops/ViewModeSwitch.  
+    and...
+    http://tympanus.net/Blueprints/ResponsiveIconGrid/#
+    See Codrops for me of these animation effects. 
+    BILL SERGIO - Many people have used the code in these projects in their 
+    own commercial shopping carts and FAILED to give credit to the actual authors on Codrops.
+*/
 
 a:hover {
     color: #fff;
@@ -91,16 +88,6 @@ button.flr-top {
 	 background-image: none;
 }
 
-/*
-.container li{
-    border-bottom: 1px solid #eee; 
-    font-size: 14px; 
-    list-style: none; 
-    padding: 30px 0 20px 30px; 
-    position: relative; 
-    background-color:rgba(255,255,255,1);
-}
-*/
 /* BIG CONFLICT WITH CONTAINER !!! NEED TO RE-WRITE THIS !!! */
 .container li{
     border-bottom: 1px solid #eee; 
@@ -115,23 +102,21 @@ button.flr-top {
 
 .nav-pills li a{
     text-decoration:none;
-    font-family:'Dosis', Sans-Serif;
-    font-size:28px;
-    font-weight:200;
-    color:#222222;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:26px;
+    font-weight:500;
+    color:#333;
     margin-top:20px;
-}
-    
-.nav-pills li img, .nav-pills li .imgcart {
-    float:left;
-    margin-right:20px;
-     -webkit-transition: all 0.3s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-     -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
-       -o-transition: all 0.3s ease-out;  /* Opera 10.50–12.00 */
-          transition: all 0.3s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
-} 
-    
+    vertical-align: top !important;
+    max-width: 300px !important;
+    padding: 14px 0px 14px 0px !important;
+    line-height: 2.2ex !important;
+    height: 4.4ex !important;
+    overflow: hidden !important;
+    max-lines: 2 !important;
 
+}
+     
 .nav-pills li:hover a{color:#fff;}  
 
 .nav-pills li:hover .categoryname{color:rgba(255,255,255,0.5);} 
@@ -220,32 +205,20 @@ button.flr-top {
 }
     
 .content_desc{
-    font-family: 'Arial',Sans-Serif;
+    font-family: 'Lato',Sans-Serif;
     font-size: 24px;
     font-weight: 300;
-    margin-top:6px;
+    margin-top:40px;
     margin-right: 100px;
-    padding:6px 10px 10px 0px;
+    padding:10px 10px 10px 0px;
     float:right;
     height:30px;
 }
 
 .content_desc span{
-	margin-left:22px;
-	 font-size: 22px;
+	margin-left:20px;
+	 font-size: 20px;
 }
-
-.content_price {
-    position:absolute;
-    right: 16px;
-    font-family: 'Arial',Sans-Serif;
-    font-size: 24px;
-    font-weight: 600;
-    margin-top:2px;
-    float:right;
-    height:70px;
-}
-
 .btn-block, .btn-success, .btn-inverse, .btn-primary, .btn-danger {
 	background-image: none;
 }
@@ -255,28 +228,6 @@ button.flr-top {
 .input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
     border-radius: 0 2px 2px 0;
 }
-.btn-cart {
-    background-color: hsl(201, 100%, 30%) !important;
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00a5ff", endColorstr="#006399");
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#00a5ff), to(#006399));
-    background-image: -moz-linear-gradient(top, #00a5ff, #006399);
-    background-image: -ms-linear-gradient(top, #00a5ff, #006399);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00a5ff), color-stop(100%, #006399));
-    background-image: -webkit-linear-gradient(top, #00a5ff, #006399);
-    background-image: -o-linear-gradient(top, #00a5ff, #006399);
-    background-image: linear-gradient(#00a5ff, #006399);
-    border-color: #006399 #006399 hsl(201, 100%, 25%);
-    color: #fff !important;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
-    -webkit-font-smoothing: antialiased;
-}
-
-.btn-split {
-    background-color: #E3E3E3 !important;
-    background-repeat: repeat-x;
-}
-
 .form-search .input-append .btn {
     border-radius: 0 0px 0px 0;
 }
@@ -326,9 +277,9 @@ input[type="text"]{
     }
 
 .nav-pills li .categoryname{
-    color:rgba(255,255,255,0.2);
-    border:rgba(255,255,255,2);
-    font-family:'Arial Rounded MT', Sans-Serif;
+    color:rgba(255,255,255,0.4);
+    border:rgba(255,255,255,1);
+    font-family:'BebasNeuewebfont', Sans-Serif;
     font-size: 36px !important;
     margin-top: 0px !important;
     z-index:99999;
@@ -368,8 +319,6 @@ table{background:rgba(255,255,255,0.8);}
 
 
 
-
-/* PRODUCT */
 .content-backcolor {
 	background:rgba(255,255,255,1);
 }
@@ -493,10 +442,10 @@ table tr:hover {
     text-align:center;
     float:left;
     margin-bottom:20px;
-     -webkit-transition: all 0.3s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-     -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
-       -o-transition: all 0.3s ease-out;  /* Opera 10.50–12.00 */
-          transition: all 0.3s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+     -webkit-transition: all 0.2s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+     -moz-transition: all 0.2s ease-out;  /* Firefox 4-15 */
+       -o-transition: all 0.2s ease-out;  /* Opera 10.50–12.00 */
+          transition: all 0.2s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
     }
     .activegrid .nav-pills li .categoryname {
         border: medium none #FFFFFF;
@@ -569,7 +518,7 @@ table tr:hover {
 @media only screen and (max-width: 481px) 
 {
     .container h1.well {
-	     font-size: 26px;
+	     font-size: 28.5px;
     }
     .activegrid ul.nav-pills li img {
 	    float:none;
@@ -578,7 +527,7 @@ table tr:hover {
         margin-left: 0;
     }
     .flr-top-first {
-	    margin: 10px 4px 0 10px;
+	    margin: 10px 5px 0 10px;
 	    font-size: 12px;
 	    line-height: 15px;
     }
@@ -586,7 +535,7 @@ table tr:hover {
 	    margin-right: 40px;
     }
     .activegrid ul.nav-pills li img {
-        margin-bottom: 28px;
+        margin-bottom: 30px;
     }
     button.flr-top {
 	    font-size: 12px;

@@ -40,6 +40,7 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
     $scope.STORE_ID = CONFIG.STORE_ID;
     $scope.STORE_PAGE = CONFIG.STORE_PAGE;
     $scope.STORE_BG_IMAGE = CONFIG.STORE_BG_IMAGE;
+    $scope.DISTRIBUTOR_ID = CONFIG.DISTRIBUTOR_ID;
     $scope.PRODUCTS_FILE = CONFIG.PRODUCTS_FILE;
     $scope.PRODUCTS_FOLDER = CONFIG.PRODUCTS_FOLDER;
     $scope.NAVBAR_THEME = CONFIG.NAVBAR_THEME;

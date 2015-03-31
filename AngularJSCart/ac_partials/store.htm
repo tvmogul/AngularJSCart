@@ -62,15 +62,15 @@
 
                     <div style="padding-bottom: 2px !important;"></div>
 
-                    <a class="ztitle" href="#/products/{{product.sku}}"><span ng-bind-html="product.productname | unsafe"></span></a>
+                    <a class="ztitle" href="#/products/{{product.sku}}"><span ng-bind-html="product.header | unsafe"></span></a>
                     <p class="zdescription" ng-bind-html="product.shortdesc | unsafe"></p>
 
                     <a href="" ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)">
-                        <div class="btn btn-cart">Add cart</div>
+                        <div class="btn btn-x-blue">Add cart</div>
                     </a>
 
                     <a class="details-button" ng-href="#/products/{{product.sku}}">
-                        <div class="btn btn-cart">Details</div>
+                        <div class="btn btn-x-blue">Details</div>
                     </a>
                     <span class="categoryname" href="#">{{product.categoryname}}</span>
                     <p class="content_price">
@@ -80,7 +80,7 @@
                         </span>
                     </p>
                     <div ng-show="product.link.length > 0">
-                        <a href="{{product.link}}" target="_blank"><span class="btn btn-custom">{{product.linktext}}</span></a>
+                        <a href="{{product.link}}" target="_blank"><span class="btn btn-x-blue">{{product.linktext}}</span></a>
                     </div>
                     <div class="clear"></div>
                 </li>

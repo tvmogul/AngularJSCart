@@ -5,6 +5,7 @@ var config_module = angular.module('storeApp.config', [])
     'STORE_ID': 'SerGioApps',
     'STORE_PAGE': 'storefront.html',
     'STORE_BG_IMAGE': 'ac_img/bg1.jpg',
+    'DISTRIBUTOR_ID': 'WS1732',
     'PRODUCTS_FILE': 'ac_products/products.txt',
     'PRODUCTS_FOLDER': 'ac_products',
     'NAVBAR_THEME': 'navbar_gray_gradient',

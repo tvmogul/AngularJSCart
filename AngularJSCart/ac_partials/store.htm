@@ -33,10 +33,10 @@
             </table>
 
 
-            <div class="content-search">
-                <input type="text" ng-model="query" ng-change="search('productname')" class="search-query" placeholder="Search">
+            <div style="width: 300px !important;padding-bottom: 12px !important;">
+                <input type="text" ng-model="query" ng-change="search('productname')" class="searchbox" placeholder="Search">
             </div>
-            <div class="filter-button-top">
+            <div class="filter-button-top" style="display:inline !important;width: 100% !important;">
                 <button class="btn flr-top-first" ng-click="filterCategory('categoryname',null)">All</button>
                 <button class="btn flr-top" ng-click="filterCategory('categoryname','software')">Software</button>
                 <button class="btn flr-top" ng-click="filterCategory('categoryname','cool')">Cool</button>
@@ -62,8 +62,8 @@
 
                     <div style="padding-bottom: 2px !important;"></div>
 
-                    <a class="ztitle" href="#/products/{{product.sku}}"><span ng-bind-html="product.header | unsafe"></span></a>
-                    <p class="zdescription" ng-bind-html="product.shortdesc | unsafe"></p>
+                    <a href="#/products/{{product.sku}}"><span ng-bind-html="product.header | unsafe"></span></a>
+                    <p ng-bind-html="product.shortdesc | unsafe"></p>
 
                     <a href="" ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)">
                         <div class="btn btn-x-blue">Add cart</div>
@@ -72,13 +72,13 @@
                     <a class="details-button" ng-href="#/products/{{product.sku}}">
                         <div class="btn btn-x-blue">Details</div>
                     </a>
-                    <span class="categoryname" href="#">{{product.categoryname}}</span>
-                    <p class="content_price">
+                    <span class="categoryname" href="#">{{product.categoryname}}</span><p></p>
+                    <span class="content_price" style="float: right !important;margin-right:-20px !important;">
                         {{product.unitprice | currency}}
                         <span ng-show="cart.getTotalCount(product.sku) > 0">
                             <i class="fa fa-check-square-o"></i>{{cart.getTotalCount(product.sku)}}
                         </span>
-                    </p>
+                    </span>
                     <div ng-show="product.link.length > 0">
                         <a href="{{product.link}}" target="_blank"><span class="btn btn-x-blue">{{product.linktext}}</span></a>
                     </div>

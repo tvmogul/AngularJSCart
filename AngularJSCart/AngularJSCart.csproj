@@ -72,7 +72,6 @@
     <Content Include="ac_css\navbar_brown_gradient.css" />
     <Content Include="ac_css\navbar_dkred_gradient.css" />
     <Content Include="ac_css\navbar_gray_gradient.css" />
-    <Content Include="ac_css\pinboard.css" />
     <Content Include="ac_css\sticky.css" />
     <Content Include="ac_css\style.css" />
     <Content Include="ac_img\10_megavideo.png" />

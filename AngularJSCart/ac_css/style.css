@@ -1,6 +1,4 @@
-﻿/* --- main layout --- */
-	
-* { margin: 0; padding: 0; }
+﻿* { margin: 0; padding: 0; }
 
 body {
     min-height: 2000px; /* for bootstrap 3 fixed navbar fix */
@@ -23,6 +21,14 @@ html {
   background-size: cover;
 }
 	
+.clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0} 
+.nowrp {white-space:nowrap;}
+.wrapper {width:100%; overflow:hidden;}
+.logo {
+	float:left;
+	margin: 0px 10px 0px 20px;
+}
+
 
 .autoResizeImage {
     max-width: 100%;
@@ -52,7 +58,7 @@ html {
    
 
 
-.clear {clear:both}
+
 .alignright {text-align:right}
 .aligncenter {
     text-align:center !important;
@@ -94,16 +100,6 @@ img {vertical-align:top;padding-top:0px;}
 }
 
 	
-.clear {clear:both}
-.nowrp {white-space:nowrap;}
-.wrapper {width:100%; overflow:hidden;}
-
-#logo {
-	top: 0;
-	padding: 4px 0 0 0;
-	vertical-align:top;
-}
-
 #zheader {
  width: 100%;
  margin: 0 auto !important;
@@ -135,20 +131,20 @@ img {vertical-align:top;padding-top:0px;}
 }
 
 
-      li{
-        line-height: 30px;
-      }
-      .codebox{
-        border:2px solid;
-        border-radius:2px;
-        background-color:#c9e2b8;
-        padding:20px;
-      }
-      pre{
-        padding: 10px;
-        line-height:30px;
-        color:#4c3f3d;
-        font-size: 14px;
-      }
+li{
+line-height: 30px;
+}
+.codebox{
+border:2px solid;
+border-radius:2px;
+background-color:#c9e2b8;
+padding:20px;
+}
+pre{
+padding: 10px;
+line-height:30px;
+color:#4c3f3d;
+font-size: 14px;
+}
 
  

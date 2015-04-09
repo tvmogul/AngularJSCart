@@ -19,6 +19,8 @@ function shoppingCart(cartName) {
         self.saveItems();
         self.clearCart = false;
     });
+
+
 }
 
 // load items from local storage
@@ -79,6 +81,7 @@ shoppingCart.prototype.addItem = function (sku, productname, unitprice, quantity
     else {
         alert("It's FREE, no need to add to cart!");
     }
+
 }
 
 // adds an item to the cart from non-angular page using url parameters

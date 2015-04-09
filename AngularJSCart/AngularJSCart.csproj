@@ -61,10 +61,12 @@
     <Content Include="ac_css\bootstrap-theme.min.css" />
     <Content Include="ac_css\bootstrap.css" />
     <Content Include="ac_css\bootstrap.min.css" />
+    <Content Include="ac_css\buttons.css" />
     <Content Include="ac_css\component.css" />
     <Content Include="ac_css\font-awesome-4.3.0\css\font-awesome.css" />
     <Content Include="ac_css\font-awesome-4.3.0\css\font-awesome.min.css" />
     <Content Include="ac_css\font-awesome-4.3.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="ac_css\hover.css" />
     <Content Include="ac_css\img\glyphicons-halflings-white.png" />
     <Content Include="ac_css\img\glyphicons-halflings.png" />
     <Content Include="ac_css\navbar_black_gradient.css" />
@@ -72,6 +74,7 @@
     <Content Include="ac_css\navbar_brown_gradient.css" />
     <Content Include="ac_css\navbar_dkred_gradient.css" />
     <Content Include="ac_css\navbar_gray_gradient.css" />
+    <Content Include="ac_css\pinboard.css" />
     <Content Include="ac_css\sticky.css" />
     <Content Include="ac_css\style.css" />
     <Content Include="ac_img\10_megavideo.png" />
@@ -85,8 +88,13 @@
     <Content Include="ac_img\5_liveleak.png" />
     <Content Include="ac_img\6_break.png" />
     <Content Include="ac_img\7_ebaumsworld.png" />
+    <Content Include="ac_img\8c1cb28a041767fa65c81784660cb0ec.jpg" />
     <Content Include="ac_img\8_collegehumor.png" />
     <Content Include="ac_img\9_blinkx.png" />
+    <Content Include="ac_img\ajax-loader.gif" />
+    <Content Include="ac_img\all_logo1 %281%29.png" />
+    <Content Include="ac_img\all_logo1.png" />
+    <Content Include="ac_img\AngularShieldLogo.png" />
     <Content Include="ac_img\bg1.jpg" />
     <Content Include="ac_img\bg2.jpg" />
     <Content Include="ac_img\bg3.jpg" />
@@ -103,16 +111,19 @@
     <Content Include="ac_img\favicon.ico" />
     <Content Include="ac_img\logo.png" />
     <Content Include="ac_img\logo2.png" />
+    <Content Include="ac_img\mzl.rmtrctnm.png" />
     <Content Include="ac_img\nb_black.png" />
     <Content Include="ac_img\nb_blue.png" />
     <Content Include="ac_img\nb_brown.png" />
     <Content Include="ac_img\nb_gray.png" />
     <Content Include="ac_img\nb_red.png" />
+    <Content Include="ac_img\next.png" />
+    <Content Include="ac_img\prev.png" />
     <Content Include="ac_img\stripeCardPayments_blog2.jpg" />
+    <Content Include="ac_js\angular-qr.js" />
     <Content Include="ac_js\angular-resource.1.3.15.min.js" />
     <Content Include="ac_js\angular-route.1.3.15.min.js" />
     <Content Include="ac_js\angular.1.3.15.min.js" />
-    <Content Include="ac_js\angular.1.4.0.min.js" />
     <Content Include="ac_js\app.js" />
     <Content Include="ac_js\bootstrap.js" />
     <Content Include="ac_js\bootstrap.min.js" />
@@ -120,6 +131,7 @@
     <Content Include="ac_js\jquery-1.11.2.min.js" />
     <Content Include="ac_js\jquery.blockUI.min.js" />
     <Content Include="ac_js\jquery.form.js" />
+    <Content Include="ac_js\qrcode.js" />
     <Content Include="ac_js\shoppingCart.js" />
     <Content Include="ac_partials\cart.htm" />
     <Content Include="ac_partials\product.htm" />
@@ -136,9 +148,12 @@
     <Content Include="ac_products\kitty_toilet_trainer.jpg" />
     <Content Include="ac_products\lifestraw.jpg" />
     <Content Include="ac_products\maxpay.png" />
+    <Content Include="ac_products\nopic.png" />
     <Content Include="ac_products\pineapple_slicer.jpg" />
     <Content Include="ac_products\products.txt" />
     <Content Include="ac_products\ranked_tvstations.png" />
+    <Content Include="ac_products\securityguard.jpg" />
+    <Content Include="ac_products\store.gif" />
     <Content Include="ac_products\TaskbarNotifiers4.gif" />
     <Content Include="ac_products\tv_course.png" />
     <Content Include="ac_products\visiblehair.png" />
@@ -193,6 +208,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\quicksand-regular.woff" />
     <Content Include="ac_js\angular-route.min.js.map" />
+    <Content Include="ac_img\angularjs_logo.psd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

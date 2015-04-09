@@ -9,12 +9,6 @@
 	font-style: normal;
 }
 
-/* Main container 
-.cbp-vm-switcher {
-	padding: 20px;
-	border: 1px solid #353B49;
-}*/
-
 /* options/select wrapper with switch anchors */
 .cbp-vm-options {
 	text-align: right;
@@ -89,6 +83,47 @@
     transition: all 0.3s ease-in-out;
 }
 
+
+/* BEGIN- list .cbp-vm-list */
+.nav-pills li .store_img_video {
+  float: left !important;
+  text-align:left !important;
+  margin: 0px 20px 0px 0px !important;
+  -webkit-transition: all 0.6s ease-out;
+  -moz-transition: all 0.6s ease-out;
+  -o-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+}
+.nav-pills li .store_header, .nav-pills li .store_shortdesc  {
+  float: none !important;
+  text-align:left !important;
+  max-width: 60% !important;
+  margin: 0px 20px 0px 0px !important;
+  -webkit-transition: all 0.6s ease-out;
+  -moz-transition: all 0.6s ease-out;
+  -o-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+}
+/* END- list .cbp-vm-list */
+
+/* BEGIN - grid .cbp-vm-grid */
+.activegrid ul.nav-pills li .store_img_video {
+    text-align:center !important;
+    float:none !important;
+}
+.activegrid ul.nav-pills li .store_header, .activegrid ul.nav-pills li .store_shortdesc {
+  float: none !important;
+  text-align:left !important;
+  max-width: 100% !important;
+  margin: 0px 20px 0px 0px !important;
+  padding: 0px 20px 0px 0px !important;
+  -webkit-transition: all 0.6s ease-out;
+  -moz-transition: all 0.6s ease-out;
+  -o-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+}
+/* END - grid .cbp-vm-grid */
+
 .cbp-vm-image {
 	display: block;
 	margin: 0 auto;
@@ -152,38 +187,32 @@
 	content: "\f055";
 }
 
-/* Individual view mode styles */
 
 /* Large grid view */
 .activegrid ul.nav-pills  {
 }
-.activegrid .content_desc {
-	text-align:left;
-	float: inherit;
-}
-.activegrid ul.nav-pills li {
-	width: 33%;
-	padding: 6px 24px 24px 24px;
-	margin: 0px 0 0;
-	display: inline-block;
-	min-height: 340px;
-	vertical-align: top;
-	border-right:1px solid #ffffff;
-	
+
+ul li div:hover div.store_header,
+li.store_pill:hover div.store_header,
+li.store_pill:hover div.store_shortdesc, 
+ul li div:hover div.store_shortdesc, 
+ul li div:hover .activegrid ul.nav-pills, 
+ul li div:hover .activegrid .store_shortdesc, 
+ul li div:hover .activegrid ul.nav-pills li {
+    color:#fff !important;
 }
 
-.activegrid .nav-pills .description{margin-left:0px;}
-.activegrid .nav-pills .rectangle-list li:after{display:none;}
-.activegrid .nav-pills .rating-f .example-f{}
-.activegrid ul.nav-pills li img{
-    text-align:center;
-    float:none;
-    margin-bottom:20px;
-     -webkit-transition: all 0.3s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-     -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
-       -o-transition: all 0.3s ease-out;  /* Opera 10.50�12.00 */
-          transition: all 0.3s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
-    }
+
+.activegrid ul.nav-pills li {
+	width: 33%;
+	padding: 4px 25px 25px 25px;
+	margin: 0px 0 0;
+	display: inline-block;
+	min-height: 350px;
+	vertical-align: top;
+	border-right:1px solid #EEE;
+	
+}
 
 .activegrid .nav-pills .cbp-vm-title {
 	font-size: 1.3em;
@@ -268,7 +297,7 @@
 
 @media screen and (max-width: 47.375em) {
 	.cbp-vm-view-list .cbp-vm-image {
-		width: 30%;
+		width: 60%;
 	}
 
 	.cbp-vm-view-list .cbp-vm-title {
@@ -290,7 +319,8 @@
 
 @media screen and (max-width: 40.125em) {
 	.activegrid ul.nav-pills li {
-		width: 80%;
+		width: 100%;
 	}
+
 }
 

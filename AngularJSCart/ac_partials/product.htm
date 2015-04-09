@@ -1,18 +1,18 @@
 ﻿<div id="store" class="content col-md-12" style="overflow: hidden;">
 
     <div id="prod-top" class="prod-top-img col-md-12">
-        <div class="cart-txt-top">
+        <div class="product_block">
 
             <div ng-show="product.showvideo < 1">
                 <img ng-src="ac_products/{{product.imagename}}" alt="{{product.productname}}" style="padding-right:20px !important;" /><br />
             </div>
 
-            <div ng-show="product.showvideo > 0" class="video-wrapper">
+            <div ng-show="product.showvideo > 0" class="video_wrapper">
                 <div my-youtube code="product.videoid"></div>
             </div>
 
-            <span style="display: inline !important;font-family:Arial Black;font-size:1.8em;font-weight:bold;" ng-bind-html-unsafe="product.productname"></span><br />
-            <p class="product-desc" ng-bind-html="product.description | unsafe"></p><br />
+            <span style="font-family:Arial Black;font-size:1.8em;font-weight:bold;" ng-bind-html="product.header | unsafe"></span><br />
+            <p class="product_description" ng-bind-html="product.description | unsafe"></p><br />
 
         </div>
     </div>
@@ -39,8 +39,8 @@
                         <td class="tdRight detail-img">
                             <!--<img ng-src="ac_products/details/{{product.imagename}}" alt=""/>-->
                         </td>
-                        <td class="tdRight detail-title"><p ng-bind-html="product.productname | unsafe"></p></td>
-                        <td class="tdCenter detail-desc"><p ng-bind-html="product.categoryname | unsafe"></p></td>
+                        <td class="tdRight product_productname"><p ng-bind-html="product.productname | unsafe"></p></td>
+                        <td class="tdCenter product_categoryname"><p ng-bind-html="product.categoryname | unsafe"></p></td>
                     </tr>
                 </table>
             </div>

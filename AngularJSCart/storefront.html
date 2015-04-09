@@ -33,8 +33,17 @@
     using those two files separately but it just saves you an extra request. We are using Bootstrap 3 plus here! -->
     <link href="ac_css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="ac_css/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="ac_css/style.css" rel="stylesheet" />
+    <link href="ac_css/buttons.css" rel="stylesheet" />
+
     <link href="ac_css/component.css" rel="stylesheet" type="text/css">
+    <link href="ac_css/pinboard.css" rel="stylesheet">
     <link href="ac_css/sticky.css" rel="stylesheet" />
+    <link href="ac_css/hover.css" rel="stylesheet" media="all">
+
+
+
 
     <script src="ac_js/jquery-1.11.2.min.js" type="text/javascript"></script>
     <script src="ac_js/bootstrap.min.js" type="text/javascript"></script>
@@ -42,15 +51,12 @@
     <script src="ac_js/angular.1.3.15.min.js" type="text/javascript"></script>
     <script src="ac_js/angular-route.1.3.15.min.js" type="text/javascript"></script>
 
-
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,600,300" rel="stylesheet" type="text/css">
-    
+
     <!-- AngularStore app -->
     <script src="ac_products/config.js"></script>
     <script src="ac_js/shoppingCart.js"></script>
-
- 
     <script src="ac_js/app.js" type="text/javascript"></script>
 
 
@@ -69,8 +75,11 @@
     <link id="link_index" href="" rel="stylesheet" type="text/css" />
 
     <script>
+        var _carousel_animation = "hvr-pulse";
+
         var _navbar_theme = "navbar_gray_gradient";
         var arBGs = [
+        "ac_img/bg0.jpg",
         "ac_img/bg1.jpg",
         "ac_img/bg2.jpg",
         "ac_img/bg3.jpg",
@@ -80,194 +89,47 @@
         "ac_img/bg7.jpg",
         "ac_img/bg8.jpg"];
 
-        var _bgImage = "ac_img/bg3.jpg";
+        var _bgImage = "ac_img/bg0.jpg";
         if (localStorage["bg_cart"]) {
             _bgImage = localStorage["bg_cart"];
         } else {
-            _bgImage = "ac_img/bg3.jpg";
+            _bgImage = "ac_img/bg0.jpg";
             localStorage["bg_cart"] = _bgImage;
         }
 
         $(document).ready(function () {
             $("body").css('background-image', '');
             $("body").css("background", "#ffffff url(" + _bgImage + ") no-repeat center center fixed");
+
+            //$(window).bind('resize', function () {
+            //    if ($('#storeslider_wrapper').css('display') === 'block') {
+            //        $('.carousel_trim').css('display', 'block');
+            //        $('#storeslider_wrapper').css('display', 'block');
+            //        $("#storeslider").slick('slickPrev');
+            //        $("#storeslider").slick('slickNext');
+            //    }
+            //});
         });
 
         // Fires after JQuery doc.ready
         //angular.element(document).ready(function () {
         //});
 
-        //function javaScriptCall(value) {
-        //    var scope = angular.element(document.getElementById('idForJS')).scope();
-        //    var retrunValue = scope.javaScriptCallAngular(value);
-        //    alert(retrunValue);
-        //}
+        $(document).delegate('#storeslider .btn-x-success', 'click', function () {
+            //e.preventDefault();
+            // This loop through JavaScript is necessary becassary we lose the ng-click bnding when teh carousel is resized on mobile devices!!!
+            // We have 2 solutions: we can call this JavaScript function OR we can re-write the code to allow for re-loading the slides array
+            // to allow the slick carousel time to rebuild itself--or we can use $timeout. I decided here to just call aJS function.
+            // I will update this to rebuild slides array on window resize in the next release so it won't be necessary to route through JS.
+            // BILL SERGIO - Note that 'idForJS' MUST be on teh same element that declares your controller !!!
+            var _rtn = angular.element(document.getElementById('idForJS')).scope().forceAddItem($(this).attr("data-sku"), $(this).attr("data-productname"), $(this).attr("data-unitprice"), +1);
+            return false;
+        });
 
     </script>
 
+    <style type="text/css">
 
-    <style>
-    @charset "UTF-8";
-
-    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-        display: none;
-    }
-
-    ng\:form {
-        display: block;
-    }
-
-    /* To create cool Bootstrap 3 buttons go to: http://charliepark.org/bootstrap_buttons/ */
-    .btn-x-default {
-        background-color: hsl(0, 0%, 8%) !important;
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#939393", endColorstr="#141414");
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#939393), to(#141414));
-        background-image: -moz-linear-gradient(top, #939393, #141414);
-        background-image: -ms-linear-gradient(top, #939393, #141414);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #939393), color-stop(100%, #141414));
-        background-image: -webkit-linear-gradient(top, #939393, #141414);
-        background-image: -o-linear-gradient(top, #939393, #141414);
-        background-image: linear-gradient(#939393, #141414);
-        border-color: #141414 #141414 hsl(0, 0%, -4.5%);
-        color: #fff !important;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.82);
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .btn-x-success {
-        background-color: hsl(110, 56%, 33%) !important;
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5aca44", endColorstr="#348325");
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#5aca44), to(#348325));
-        background-image: -moz-linear-gradient(top, #5aca44, #348325);
-        background-image: -ms-linear-gradient(top, #5aca44, #348325);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5aca44), color-stop(100%, #348325));
-        background-image: -webkit-linear-gradient(top, #5aca44, #348325);
-        background-image: -o-linear-gradient(top, #5aca44, #348325);
-        background-image: linear-gradient(#5aca44, #348325);
-        border-color: #348325 #348325 hsl(110, 56%, 28%);
-        color: #fff !important;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .btn-x-black {
-        background-color: hsl(0, 0%, 8%) !important;
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#707070", endColorstr="#141414");
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#707070), to(#141414));
-        background-image: -moz-linear-gradient(top, #707070, #141414);
-        background-image: -ms-linear-gradient(top, #707070, #141414);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #707070), color-stop(100%, #141414));
-        background-image: -webkit-linear-gradient(top, #707070, #141414);
-        background-image: -o-linear-gradient(top, #707070, #141414);
-        background-image: linear-gradient(#707070, #141414);
-        border-color: #141414 #141414 hsl(0, 0%, -1%);
-        color: #fff !important;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.59);
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .btn-x-danger {
-        background-color: hsl(0, 69%, 34%) !important;
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#da3838", endColorstr="#921a1a");
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#da3838), to(#921a1a));
-        background-image: -moz-linear-gradient(top, #da3838, #921a1a);
-        background-image: -ms-linear-gradient(top, #da3838, #921a1a);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #da3838), color-stop(100%, #921a1a));
-        background-image: -webkit-linear-gradient(top, #da3838, #921a1a);
-        background-image: -o-linear-gradient(top, #da3838, #921a1a);
-        background-image: linear-gradient(#da3838, #921a1a);
-        border-color: #921a1a #921a1a hsl(0, 69%, 29%);
-        color: #fff !important;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .content_price {
-        font-size:1.4em !important;
-    }
-
-    .btn-custom, .btn-x-blue {
-	    color:##fff;
-	    font-weight: 500;
-	    font-family: 'Open-sans', Sans-Serif;
-    }
-
-    .btn-custom, .btn-x-blue {
-        background-color: hsl(201, 100%, 30%) !important;
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00a5ff", endColorstr="#006399");
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#00a5ff), to(#006399));
-        background-image: -moz-linear-gradient(top, #00a5ff, #006399);
-        background-image: -ms-linear-gradient(top, #00a5ff, #006399);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00a5ff), color-stop(100%, #006399));
-        background-image: -webkit-linear-gradient(top, #00a5ff, #006399);
-        background-image: -o-linear-gradient(top, #00a5ff, #006399);
-        background-image: linear-gradient(#00a5ff, #006399);
-        border-color: #006399 #006399 hsl(201, 100%, 25%);
-        color: #fff !important;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .input-append .add-on, .input-prepend .add-on, .input-append .btn, .input-prepend .btn,
-    .input-append .btn-group > .dropdown-toggle, .input-prepend .btn-group > .dropdown-toggle {
-        vertical-align: top;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 0;
-        background-color: #ffffff;
-    }
-
-    .input-prepend .add-on, .input-prepend .btn {
-        margin-right: -1px;
-    }
-
-    .btn-split {
-        background-color: hsl(204, 100%, 28%) !important;
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5bbdff", endColorstr="#00558e");
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#5bbdff), to(#00558e));
-        background-image: -moz-linear-gradient(top, #5bbdff, #00558e);
-        background-image: -ms-linear-gradient(top, #5bbdff, #00558e);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5bbdff), color-stop(100%, #00558e));
-        background-image: -webkit-linear-gradient(top, #5bbdff, #00558e);
-        background-image: -o-linear-gradient(top, #5bbdff, #00558e);
-        background-image: linear-gradient(#5bbdff, #00558e);
-        border-color: #00558e #00558e hsl(204, 100%, 18%);
-        color: #fff !important;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.66);
-        -webkit-font-smoothing: antialiased;
-        border-radius: 8px 8px 8px 8px;
-        padding: 1px 0px 4px 4px !important;
-        margin: 0px 0px 0px 0px !important;
-        display: inline !important;
-        z-index: 99 !important;
-        font-family: 'Open Sans', Sans-Serif;
-        font-size: .9em !important;
-    }
-
-    .img-split {
-        min-width: 36px !important;
-        width: 36px !important;
-        height: 27px !important;
-        background-color: #ffffff !important;
-        border: 1px solid gray;
-        color: #fff !important;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.66);
-        -webkit-font-smoothing: antialiased;
-        border-radius: 0px 8px 8px 0;
-        padding: 2px 4px 3px 4px !important;
-        margin: -2px -4px 0px 0px !important;
-        display: inline !important;
-        border: 1px solid gray !important;
-        z-index: 9999999 !important;
-        font-family: 'Open Sans', Sans-Serif;
-        font-size: .9em !important;
-    }
 
     .center-wrapper {
         text-align: center;
@@ -280,45 +142,80 @@
     /************************************************************************************
     RESPONSIVE VIDEO
     *************************************************************************************/
-    .video-container {
-        position: relative;
-        padding-bottom: 0px;
-        padding-top: 0px;
-        height: 0px;
-        overflow: hidden;
+    /* BEGIN - video holds the iframe */
+    .video {
+        /*position: relative !important;*/
+        padding-bottom: 0px !important;
+        height: 200px !important;
+        overflow: hidden !important;
+    }
+    .video iframe,
+    .video object,
+    .video embed {
+        /*position: relative !important; PROBLEM */
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    /* END - video holds the iframe */
+
+    /************************************************************************************
+    CAROUSEL
+    *************************************************************************************/
+    .carousel_block {
+        display: block;
+        padding: 1px 0px 2px 0px !important;
+        margin: 0px auto;
+        line-height: 1.42857143;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        -webkit-transition: border .2s ease-in-out;
+        -o-transition: border .2s ease-in-out;
+        transition: border .2s ease-in-out;
+        min-height: 100% !important;
+        z-index: 9999 !important;
     }
 
-    .video-container iframe,
-    .video-container object,
-    .video-container embed {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: 100%;
+    .carousel_pill {
+        display: block;
+        padding: 1px 0px 2px 0px !important;
+        margin: 0px auto;
+        line-height: 1.42857143;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        -webkit-transition: border .2s ease-in-out;
+        -o-transition: border .2s ease-in-out;
+        transition: border .2s ease-in-out;
+        min-height: 100% !important;
+        z-index: 9999 !important;
     }
 
-    /* video fixed width wrappers */
-    .video-wrapper {
-        max-width: 300px;
-        height: 200px;
+    .carousel_img_video {
+        width: 300px;
+        max-width: 95%;
+        padding-top: 8px !important;
     }
 
-
-    /*#####################
-    Additional Styles (required)
-    ######################*/
-
-    .carousel_title {
+    .carousel_bottom {
         vertical-align: top !important;
-        max-width: 300px !important;
-        padding: 14px 0px 14px 0px !important;
+        max-width: 100% !important;
+        padding: 0px 0px 4px 0px !important;
+        margin-top: 4px !important;
+    }
+
+    .carousel_caption {
+        vertical-align: top !important;
+        max-width: 100% !important;
+        padding: 0px 8px 0px 8px !important;
         line-height: 3.0ex !important;
-        height: 9.0ex !important;
+        height: 7.2ex !important;
         overflow: hidden !important;
         max-lines: 2 !important;
+        margin: 0px 14px 8px 14px !important;
     }
-
 
     .carousel_shortdesc {
         height: 68px !important;
@@ -326,14 +223,17 @@
         max-width: 300px !important;
         padding: 4px 0px 0px 0px !important;
         line-height: 2.5ex !important;
-        height: 7.5ex !important;
+        height: 6ex !important;
         overflow: hidden !important;
         max-lines: 3 !important;
         margin-bottom: 10px !important;
-        /* background-color:#C0D5E5; */
     }
 
-    .thumbnail {
+    /*#####################
+    Additional Styles (required)
+    ######################*/
+
+    .carousel_pill {
         background: rgb(255,255,255); /* Old browsers */
         /* IE9 SVG, needs conditional override of 'filter' to 'none' */
         background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlNWU1ZTUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -348,32 +248,7 @@
         box-shadow: 0 2px 6px rgba(0,0,0,0.5) !important;
     }
 
-
-    /*  I decided to add some Color Coordination with the Navbars so that each navbar would have its own Hover Effect 
-        when hovering over the pills created by Codrops famous ViewModeSwitch,  The code that changes the background 
-        color and enlarges the image is taken directly from the project on Codrops related to ViewModeSwitch called the 
-        ResponsiveIconGrid at: http://tympanus.net/Blueprints/ResponsiveIconGrid/#
-        See Codrops for me of these animation effects. 
-    */
-    .video-wrapper, .video-wrapper img, .nav-pills li img, .nav-pills li .imgcart  {
-        text-align:center;
-        float:none;
-        margin-right:18px;
-            -webkit-transition: all 0.2s ease-out; 
-            -moz-transition: all 0.2s ease-out;  
-            -o-transition: all 0.2s ease-out;  
-                transition: all 0.2s ease-out;  
-    }
-    
-    .video-wrapper:hover, .video-wrapper img:hover, .nav-pills li img:hover, .nav-pills li .imgcart:hover  {
-	    -webkit-transform: scale(1.04);  
-            -moz-transform: scale(1.04);    
-            -ms-transform: scale(1.04);  
-            -o-transform: scale(1.04);  
-                transform: scale(1.04);  
-    }
-
-    .thumbnail:hover {
+    .carousel_pill:hover {
         background: rgb(125,126,125); /* Old browsers */
         background: -moz-linear-gradient(top, rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%); /* FF3.6+ */
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,1)), color-stop(100%,rgba(14,14,14,1))); /* Chrome,Safari4+ */
@@ -384,15 +259,27 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
         color: #fff !important;
         box-shadow: 0 2px 6px rgba(0,0,0,0.5) !important;
+        color:#fff !important;  
+        box-shadow: 0 2px 6px rgba(0,0,0,0.5) !important;    
+        -webkit-transition: all 0.6s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+        -moz-transition: all 0.6s ease-out;  /* Firefox 4-15 */
+        -o-transition: all 0.6s ease-out;  /* Opera 10.50–12.00 */
+        transition: all 0.6s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
     }
 
+    .store_img_video {
+        /*width: 300px !important; PROBLEM */
+        max-width: 95% !important;
+        padding-top: 8px !important;
+        margin-right: 12px !important;
+    }
 
     /* fixes bug */
     div.ng-scope.slick-slide {
         max-height: 386px !important;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 481px) {
         .top_container {
             margin-top: -40px !important;
             margin-left: 0px !important;
@@ -410,20 +297,11 @@
             margin-left: 0px !important;
         }
 
-        .activegrid ul.nav-pills li {
-            width: 95%;
-            padding: 0px 0px 0px 0px !important;
-            margin: 0px 0px 0px 0px !important;
-            display: block;
-            min-height: 220px;
-            vertical-align: top;
-            border-right: 1px solid #EEE;
-        }
-
         .imgcart, img {
             max-width: 300px !important;
             height: auto !important;
         }
+
 
         .ads {
             display: none !important;
@@ -450,75 +328,188 @@
             margin-right: 0px !important;
             margin-left: 0px !important;
         }
+
     }
 
-    .activegrid ul.nav-pills li {
-        padding-top: 20px !important;
+    .container li {
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+        list-style: none !important;
+        padding: 30px 0 20px 30px;
+        position: relative;
+        background-color: rgba(255,255,255,1);
     }
 
-    .container li{
-        border-bottom: 1px solid #eee; 
-        font-size: 14px; 
-        list-style: none !important; 
-        padding: 30px 0 20px 30px; 
-        position: relative; 
-        background-color:rgba(255,255,255,1);
-    }
-    .container .well{
-        margin-left:auto;
-        background-color:rgba(255,255,255,1);
-        margin-right:auto;
-	    margin-top:0px;
-	    margin-bottom:0px;
-        border:0px none transparent !important;
+    .container .well {
+        margin-left: auto;
+        background-color: rgba(255,255,255,1);
+        margin-right: auto;
+        margin-top: 30px;
+        margin-bottom: 0px;
+        border: 0px none transparent !important;
     }
 
 
-    .nav-pills li .categoryname{
-        color:rgba(255,255,255,0.6);
-        border:rgba(255,255,255,1);
-        text-decoration:none;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 36px !important;
-        margin-top: 0px !important;
-        z-index:999999;
-        float:right;
+    .rectangle-list p {
+        max-width: 95% !important;
     }
-    .nav-pills{margin-top:30px; margin-left:0;}
-    .nav-pills li a{
-        text-decoration:none;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size:24px;
-        font-weight:400;
-        color:rgba(14,14,14,1);
-        margin-top:14px;
-        vertical-align: top !important;
-        max-width: 300px !important;
-        padding: 14px 0px 14px 0px !important;
-        line-height: 2.0ex !important;
-        height: 4.0ex !important;
-        overflow: hidden !important;
-        max-lines: 2 !important;
-    }
-    .nav-pills li:hover a{color:#fff;}  
-    .nav-pills li:hover .categoryname{color:rgba(255,255,255,0.7);} 
-    .nav-tabs > li > a, .nav-pills > li > a{padding-left:0px;}  
 
-    
-.logo {
-	float:left;
-	margin: 20px 10px 0px 20px;
-}
+    .nav-pills {
+        margin-top: 0px;
+        margin-left: 0;
+    }
+
+    /* WS */
+    /*.store_block div {
+        clear: none;
+    }*/
+
+    .store_block {
+        min-height: 200px !important;
+    }
+
+    header {
+        -moz-box-shadow: 3px 3px 4px #000;
+        -webkit-box-shadow: 3px 3px 4px #000;
+        box-shadow: 3px 3px 4px #000;
+        -moz-box-shadow: 3px 3px 4px #000;
+        -webkit-box-shadow: 3px 3px 4px #000;
+        box-shadow: 0px 3px 40px #000;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+        filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+    }
+
+    body header:after {
+        background: #fceae0; /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZjZWFlMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjI2JSIgc3RvcC1jb2xvcj0iI2VmNmIyOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2VhNTUwNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2VhNTUwNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmOWUxZDQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(left, #fceae0 0%, #ef6b28 26%, #ea5507 53%, #ea5507 53%, #f9e1d4 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#fceae0), color-stop(26%,#ef6b28), color-stop(53%,#ea5507), color-stop(53%,#ea5507), color-stop(100%,#f9e1d4)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left, #fceae0 0%,#ef6b28 26%,#ea5507 53%,#ea5507 53%,#f9e1d4 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left, #fceae0 0%,#ef6b28 26%,#ea5507 53%,#ea5507 53%,#f9e1d4 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left, #fceae0 0%,#ef6b28 26%,#ea5507 53%,#ea5507 53%,#f9e1d4 100%); /* IE10+ */
+        background: linear-gradient(to right, #fceae0 0%,#ef6b28 26%,#ea5507 53%,#ea5507 53%,#f9e1d4 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceae0', endColorstr='#f9e1d4',GradientType=1 ); /* IE6-8 */
+    }
+
+    header:after {
+        content: "";
+        height: 6px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    header {
+        height: 6px;
+        padding: 0px 0px 0px 0px;
+        position: relative;
+        text-align: center;
+        z-index: 2;
+    }
+
+    #storeslider_wrapper {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    /*[class^="hvr-"]:hover {
+        text-decoration: none;
+        color: #666;
+    }*/
+
+    .myaccordion_container {
+        background-color: transparent !important;
+        padding: 0px 12px 12px 12px !important;
+        width: 400px !important;
+        margin: 0px 0px -8px 0px !important;
+        border-bottom: 4px solid #ef6b28 !important;
+    }
+
+    .myaccordion_tab {
+        /*background-color: white !important;*/
+        color: #fff;
+        border-bottom: 8px solid white;
+    }
+
+    .myaccordion_tab_header {
+        /*background-color: #ea5507 !important;*/
+        /*padding: 5px;*/
+        cursor: pointer;
+        width: 100% !important;
+    }
+
+    .myaccordion_tab_content {
+        background-color: white !important;
+        padding: 8px 8px 8px 8px !important;
+    }
+
+    .myaccordion_tab_content li {
+        display: inline !important;
+        float: left !important;
+    }
+
+    h3 {
+        margin-bottom: 0px;
+    }
+
+    .radiogroup {
+        border: 0px none transparent;
+        margin: 10px auto 10px auto;
+        padding-top: 0px;
+    }
+
+    ul#zeffects {
+        border-left: 0px none transparent !important;
+        border-right: 0px none transparent !important;
+        border-top: 4px solid #ef6b28 !important;
+        border-bottpm: 4px solid #ef6b28 !important;
+    }
+
+    .store_container {
+       max-height:52px !important;
+    }
+
+    .product_block div {
+        float: left;
+        clear: none;
+    }
+
+
+    [class^="hvr-"] {
+        font-family: 'Roboto', sans-serif;
+        font-size: .9em !important;
+    }
+    [class^="hvr-"] {
+      /*display: inline-block;*/
+      /*vertical-align: middle;*/
+      margin: .24em;
+      padding: .1em;
+      cursor: pointer;
+      border:.1em solid #564d4d;
+      background: #edecc4;
+      text-decoration: none;
+      color: #666;
+      /* Prevent highlight colour when element is tapped */
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+
+    [class^="hvr-"]:hover {
+      text-decoration: none;
+      color: #666;
+    }
 
 
 
     </style>
 
+
 </head>
-  <body>
+<body id="idForJS" ng-controller="storeController">
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-custom navbar-fixed-top" ng-controller="MyMenu" ng-init="active=true">
+    <nav class="navbar yamm navbar-custom navbar-fixed-top" ng-controller="MyMenu" ng-init="active=true">
         <!-- BIG CONFLICT WITH CONTAINER in pinboard.css to be fixed later!!! -->
         <div class="zcontainer">
             <div class="navbar-header" style="padding-right: 20px !important;">
@@ -537,6 +528,8 @@
                     <!--An elegant way to set the active tab is to use ng-controller to run a single controller outside of the ng-view as shown below:-->
                     <li ng-class="{ active: isActive('/store')}" id="store"><a ng-href="storefront.html#/store"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Store</a></li>
                     <li ng-class="{ active: isActive('/cart')}" id="cart"><a ng-href="storefront.html#/cart"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Cart</a></li>
+                    <!--<li ng-click="showHideCarousel($event)"><a href="#"><span class="glyphicon glyphicon-transfer"></span>&nbsp;Carousel </a></li>-->
+                    <li><a target="_blank" ng-href="http://www.software-rus.com/storefront.html"><span class="glyphicon glyphicon-transfer"></span>&nbsp;Carousel </a></li>
                     <li ng-click="changeBackgroundImage($event)"><a href="#"><span class="glyphicon glyphicon-wrench"></span>&nbsp;BG </a></li>
                     <li class="dropdown">
                         <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"></span>&nbsp;NavBars<span class="caret"></span></a>
@@ -548,6 +541,180 @@
                             <li ng-click="changeNavBar('navbar_black_gradient')"><a href="#"><img src="ac_img/nb_black.png" />&nbsp;Black Gradient</a></li>
                         </ul>
                     </li>
+                    <!-- Accordion demo -->
+                    <li class="dropdown">
+                        <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"></span>&nbsp;Effects<span class="caret"></span></a>
+                        <ul id="zeffects" class="dropdown-menu" ng-click="$event.stopPropagation()">
+                            <div class="myaccordion_container">
+                                <div style="width: 100%;">
+                                    <!--<select data-ng-model="effect_item" data-ng-options="t.id as t.effect_item for t in effect_items"></select>-->
+                                    <table style="width: 100% !important;">
+                                        <tr>
+                                            <td><span class="center-block">Apply to Item Selected Below:&nbsp;</span></td>
+                                            <td style="padding:4px 0px 4px 0px !important;">
+                                                <!--<div class=" col-sm-12 radiogroup">
+                                                <radio-button-group class="btn-group" data-toggle="buttons-radio" model="modelAction" options="optActions" id="idProperty" name="nameProperty" suffix="bootstrapSuffix"></radio-button-group>
+                                                </div>-->
+                                                <a ng-click="changeAnimation('')" class="btn btn-x-danger">Remove Effect from Selected Item</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <!--<td><span class="center-block">Apply:&nbsp;</span></td>-->
+                                            <td style="padding:4px 0px 12px 0px !important;" colspan="2">
+                                                <div class=" col-sm-12 radiogroup">
+                                                    <radio-button-group class="btn-group" data-toggle="buttons-radio" model="myModel" options="myOptions" id="idProperty" name="nameProperty" suffix="bootstrapSuffix"></radio-button-group>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                <!-- .accordion_tab Transitions -->
+                                <div class="myaccordion_tab">
+                                    <div class="myaccordion_tab_header btn btn-x-blue hvr-pulse" ng-click="openTab('tab one')">Transitions</div>
+                                    <div class="myaccordion_tab_content" ng-show="isOpenTab('tab one')">
+                                        <a ng-click="changeAnimation('hvr-grow')" class="hvr-grow">Grow</a>
+                                        <a ng-click="changeAnimation('hvr-shrink')" class="hvr-shrink">Shrink</a>
+                                        <a ng-click="changeAnimation('hvr-pulse')" class="hvr-pulse">Pulse</a>
+                                        <a ng-click="changeAnimation('hvr-pulse-grow')" class="hvr-pulse-grow">Pulse Grow</a>
+                                        <a ng-click="changeAnimation('hvr-pulse-shrink')" class="hvr-pulse-shrink">Pulse Shrink</a>
+                                        <a ng-click="changeAnimation('hvr-push')" class="hvr-push">Push</a>
+                                        <a ng-click="changeAnimation('hvr-pop')" class="hvr-pop">Pop</a>
+                                        <a ng-click="changeAnimation('hvr-bounce-in')" class="hvr-bounce-in">Bounce In</a>
+                                        <a ng-click="changeAnimation('hvr-bounce-out')" class="hvr-bounce-out">Bounce Out</a>
+                                        <a ng-click="changeAnimation('hvr-rotate')" class="hvr-rotate">Rotate</a>
+                                        <a ng-click="changeAnimation('hvr-grow-rotate')" class="hvr-grow-rotate">Grow Rotate</a>
+                                        <a ng-click="changeAnimation('hvr-float')" class="hvr-float">Float</a>
+                                        <a ng-click="changeAnimation('hvr-sink')" class="hvr-sink">Sink</a>
+                                        <a ng-click="changeAnimation('hvr-bob')" class="hvr-bob">Bob</a>
+                                        <a ng-click="changeAnimation('hvr-hang')" class="hvr-hang">Hang</a>
+                                        <a ng-click="changeAnimation('hvr-skew')" class="hvr-skew">Skew</a>
+                                        <a ng-click="changeAnimation('hvr-skew-forward')" class="hvr-skew-forward">Skew Forward</a>
+                                        <a ng-click="changeAnimation('hvr-skew-backward')" class="hvr-skew-backward">Skew Backward</a>
+                                        <a ng-click="changeAnimation('hvr-wobble-horizontal')" class="hvr-wobble-horizontal">Wobble Horizontal</a>
+                                        <a ng-click="changeAnimation('hvr-wobble-vertical')" class="hvr-wobble-vertical">Wobble Vertical</a>
+                                        <a ng-click="changeAnimation('hvr-wobble-to-bottom-right')" class="hvr-wobble-to-bottom-right">Wobble To Bottom Right</a>
+                                        <a ng-click="changeAnimation('hvr-wobble-to-top-right')" class="hvr-wobble-to-top-right">Wobble To Top Right</a>
+                                        <a ng-click="changeAnimation('hvr-wobble-top')" class="hvr-wobble-top">Wobble Top Edge</a>
+                                        <a ng-click="changeAnimation('hvr-wobble-bottom')" class="hvr-wobble-bottom">Wobble Bottom</a>
+                                        <a ng-click="changeAnimation('hvr-wobble-skew')" class="hvr-wobble-skew">Wobble Skew</a>
+                                        <a ng-click="changeAnimation('hvr-buzz')" class="hvr-buzz">Buzz</a>
+                                        <a ng-click="changeAnimation('hvr-buzz-out')" class="hvr-buzz-out">Buzz Out</a>
+                                    </div>
+                                </div>
+
+                                <!-- .accordion_tab Background Transitions -->
+                                <div class="myaccordion_tab">
+                                    <div class="myaccordion_tab_header btn btn-x-blue hvr-bounce-to-right" ng-click="openTab('tab two')">Background Transitions</div>
+                                    <div class="myaccordion_tab_content" ng-show="isOpenTab('tab two')">
+                                        <a ng-click="changeAnimation('hvr-fade')" class="hvr-fade">Fade</a>
+                                        <a ng-click="changeAnimation('hvr-back-pulse')" class="hvr-back-pulse">Back Pulse</a>
+                                        <a ng-click="changeAnimation('hvr-sweep-to-right')" class="hvr-sweep-to-right">Sweep To Right</a>
+                                        <a ng-click="changeAnimation('hvr-sweep-to-left')" class="hvr-sweep-to-left">Sweep To Left</a>
+                                        <a ng-click="changeAnimation('hvr-sweep-to-bottom')" class="hvr-sweep-to-bottom">Sweep To Bottom</a>
+                                        <a ng-click="changeAnimation('hvr-sweep-to-top')" class="hvr-sweep-to-top">Sweep To Top</a>
+                                        <a ng-click="changeAnimation('hvr-bounce-to-right')" class="hvr-bounce-to-right">Bounce To Right</a>
+                                        <a ng-click="changeAnimation('hvr-bounce-to-left')" class="hvr-bounce-to-left">Bounce To Left</a>
+                                        <a ng-click="changeAnimation('hvr-bounce-to-bottom')" class="hvr-bounce-to-bottom">Bounce To Bottom</a>
+                                        <a ng-click="changeAnimation('hvr-bounce-to-top')" class="hvr-bounce-to-top">Bounce To Top</a>
+                                        <a ng-click="changeAnimation('hvr-radial-out')" class="hvr-radial-out">Radial Out</a>
+                                        <a ng-click="changeAnimation('hvr-radial-in')" class="hvr-radial-in">Radial In</a>
+                                        <a ng-click="changeAnimation('hvr-rectangle-in')" class="hvr-rectangle-in">Rectangle In</a>
+                                        <a ng-click="changeAnimation('hvr-rectangle-out')" class="hvr-rectangle-out">Rectangle Out</a>
+                                        <a ng-click="changeAnimation('hvr-shutter-in-horizontal')" class="hvr-shutter-in-horizontal">Shutter In Horizontal</a>
+                                        <a ng-click="changeAnimation('hvr-shutter-out-horizontal')" class="hvr-shutter-out-horizontal">Shutter Out Horizontal</a>
+                                        <a ng-click="changeAnimation('hvr--shutter-in-vertical')" class="hvr-shutter-in-vertical">Shutter In Vertical</a>
+                                        <a ng-click="changeAnimation('hvr-shutter-out-vertical')" class="hvr-shutter-out-vertical">Shutter Out Vertical</a>
+                                    </div>
+                                </div>
+
+                                <!-- .accordion_tab Border Transitions -->
+                                <div class="myaccordion_tab">
+                                    <div class="myaccordion_tab_header btn btn-x-blue hvr-ripple-in" ng-click="openTab('tab three')">Border Transitions</div>
+                                    <div class="myaccordion_tab_content" ng-show="isOpenTab('tab three')">
+                                        <a ng-click="changeAnimation('hvr-border-fade')" class="hvr-border-fade">Border Fade</a>
+                                        <a ng-click="changeAnimation('hvr-hollow')" class="hvr-hollow">Hollow</a>
+                                        <a ng-click="changeAnimation('hvr-trim')" class="hvr-trim">Trim</a>
+                                        <a ng-click="changeAnimation('hvr-ripple-out')" class="hvr-ripple-out">Ripple Out</a>
+                                        <a ng-click="changeAnimation('hvr-ripple-in')" class="hvr-ripple-in">Ripple In</a>
+                                        <a ng-click="changeAnimation('hvr-outline-out')" class="hvr-outline-out">Outline Out</a>
+                                        <a ng-click="changeAnimation('hvr-outline-in')" class="hvr-outline-in">Outline In</a>
+                                        <a ng-click="changeAnimation('hvr-round-corners')" class="hvr-round-corners">Round Corners</a>
+                                        <a ng-click="changeAnimation('hvr-underline-from-left')" class="hvr-underline-from-left">Underline From Left</a>
+                                        <a ng-click="changeAnimation('hvr-underline-from-center')" class="hvr-underline-from-center">Underline From Center</a>
+                                        <a ng-click="changeAnimation('hvr-underline-from-right')" class="hvr-underline-from-right">Underline From Right</a>
+                                        <a ng-click="changeAnimation('hvr-reveal')" class="hvr-reveal">Reveal</a>
+                                        <a ng-click="changeAnimation('hvr-underline-reveal')" class="hvr-underline-reveal">Underline Reveal</a>
+                                        <a ng-click="changeAnimation('hvr-overline-reveal')" class="hvr-overline-reveal">Overline Reveal</a>
+                                        <a ng-click="changeAnimation('hvr-overline-from-left')" class="hvr-overline-from-left">Overline From Left</a>
+                                        <a ng-click="changeAnimation('hvr-overline-from-center')" class="hvr-overline-from-center">Overline From Center</a>
+                                        <a ng-click="changeAnimation('hvr-overline-from-right')" class="hvr-overline-from-right">Overline From Right</a>
+                                    </div>
+                                </div>
+
+                                <!-- .accordion_tab Shadow and Glow Transitions -->
+                                <div class="myaccordion_tab">
+                                    <div class="myaccordion_tab_header btn btn-x-blue hvr-float-shadow" ng-click="openTab('tab four')">Shadow and Glow Transitions</div>
+                                    <div class="myaccordion_tab_content" ng-show="isOpenTab('tab four')">
+                                        <a ng-click="changeAnimation('hvr-shadow')" class="hvr-shadow">Shadow</a>
+                                        <a ng-click="changeAnimation('hvr-grow-shadow')" class="hvr-grow-shadow">Grow Shadow</a>
+                                        <a ng-click="changeAnimation('hvr-float-shadow')" class="hvr-float-shadow">Float Shadow</a>
+                                        <a ng-click="changeAnimation('hvr-glow')" class="hvr-glow">Glow</a>
+                                        <a ng-click="changeAnimation('hvr-shadow-radial')" class="hvr-shadow-radial">Shadow Radial</a>
+                                        <a ng-click="changeAnimation('hvr-box-shadow-outset')" class="hvr-box-shadow-outset">Box Shadow Outset</a>
+                                        <a ng-click="changeAnimation('hvr-box-shadow-inset')" class="hvr-box-shadow-inset">Box Shadow Inset</a>
+                                    </div>
+                                </div>
+
+                                <!-- .accordion_tab Curls -->
+                                <div class="myaccordion_tab">
+                                    <div class="myaccordion_tab_header btn btn-x-blue hvr-curl-top-right" ng-click="openTab('tab five')">Curls</div>
+                                    <div class="myaccordion_tab_content" ng-show="isOpenTab('tab five')">
+                                        <a ng-click="changeAnimation('hvr-curl-top-left')" class="hvr-curl-top-left">Curl Top Left</a>
+                                        <a ng-click="changeAnimation('hvr-curl-top-right')" class="hvr-curl-top-right">Curl Top Right</a>
+                                        <a ng-click="changeAnimation('hvr-curl-bottom-right')" class="hvr-curl-bottom-right">Curl Bottom Right</a>
+                                        <a ng-click="changeAnimation('hvr-curl-bottom-left')" class="hvr-curl-bottom-left">Curl Bottom Left</a>
+                                    </div>
+                                </div>
+
+
+                                <!-- .accordion_tab Icons -->
+                                <!--<div class="myaccordion_tab">
+                                    <div class="myaccordion_tab_header btn btn-x-blue" ng-click="openTab('tab six')">Icons</div>
+                                    <div class="myaccordion_tab_content" ng-show="isOpenTab('tab six')">
+                                        <a ng-click="changeAnimation('hvr-icon-back')" class="hvr-icon-back">Icon Back</a>
+                                        <a ng-click="changeAnimation('hvr-icon-forward')" class="hvr-icon-forward">Icon Forward</a>
+                                        <a ng-click="changeAnimation('hvr-icon-down')" class="hvr-icon-down">Icon Down</a>
+                                        <a ng-click="changeAnimation('hvr-icon-up')" class="hvr-icon-up">Icon Up</a>
+                                        <a ng-click="changeAnimation('hvr-icon-spin')" class="hvr-icon-spin">Icon Spin</a>
+                                        <a ng-click="changeAnimation('hvr-icon-drop')" class="hvr-icon-drop">Icon Drop</a>
+                                        <a ng-click="changeAnimation('hvr-icon-fade')" class="hvr-icon-fade">Icon Fade</a>
+                                        <a ng-click="changeAnimation('hvr-icon-float-away')" class="hvr-icon-float-away">Icon Float Away</a>
+                                        <a ng-click="changeAnimation('hvr-icon-sink-away')" class="hvr-icon-sink-away">Icon Sink Away</a>
+                                        <a ng-click="changeAnimation('hvr-icon-grow')" class="hvr-icon-grow">Icon Grow</a>
+                                        <a ng-click="changeAnimation('hvr-icon-shrink')" class="hvr-icon-shrink">Icon Shrink</a>
+                                        <a ng-click="changeAnimation('hvr-icon-pulse')" class="hvr-icon-pulse">Icon Pulse</a>
+                                        <a ng-click="changeAnimation('hvr-icon-pulse-grow')" class="hvr-icon-pulse-grow">Icon Pulse Grow</a>
+                                        <a ng-click="changeAnimation('hvr-icon-pulse-shrink')" class="hvr-icon-pulse-shrink">Icon Pulse Shrink</a>
+                                        <a ng-click="changeAnimation('hvr-icon-push')" class="hvr-icon-push">Icon Push</a>
+                                        <a ng-click="changeAnimation('hvr-icon-pop')" class="hvr-icon-pop">Icon Pop</a>
+                                        <a ng-click="changeAnimation('hvr-icon-bounce')" class="hvr-icon-bounce">Icon Bounce</a>
+                                        <a ng-click="changeAnimation('hvr-icon-rotate')" class="hvr-icon-rotate">Icon Rotate</a>
+                                        <a ng-click="changeAnimation('hvr-icon-grow-rotate')" class="hvr-icon-grow-rotate">Icon Grow Rotate</a>
+                                        <a ng-click="changeAnimation('hvr-icon-float')" class="hvr-icon-float">Icon Float</a>
+                                        <a ng-click="changeAnimation('hvr-icon-sink')" class="hvr-icon-sink">Icon Sink</a>
+                                        <a ng-click="changeAnimation('hvr-icon-bob')" class="hvr-icon-bob">Icon Bob</a>
+                                        <a ng-click="changeAnimation('hvr-icon-hang')" class="hvr-icon-hang">Icon Hang</a>
+                                        <a ng-click="changeAnimation('hvr-icon-wobble-horizontal')" class="hvr-icon-wobble-horizontal">Icon Wobble Horizontal</a>
+                                        <a ng-click="changeAnimation('hvr-icon-wobble-vertical')" class="hvr-icon-wobble-vertical">Icon Wobble Vertical</a>
+                                        <a ng-click="changeAnimation('hvr-icon-buzz')" class="hvr-icon-buzz">Icon Buzz</a>
+                                        <a ng-click="changeAnimation('hvr-icon-buzz-out')" class="hvr-icon-buzz-out">Icon Buzz Out</a>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </ul>
+                    </li>
+
                     <li class="dropdown">
                         <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-film"></span>&nbsp;Video Sites<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
@@ -566,7 +733,9 @@
                             <li><a ng-href="https://vine.co/" target="_blank"><img favicon url="'https://vine.co/'" description="'Vine'">&nbsp;<img src="ac_img/13_vine.png"></a></li>
                         </ul>
                     </li>
+                    <li><a ng-href="http://www.software-rus.com/powerpinboard.html" target="_blank"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;Source Code </a></li>
                     <li><a ng-href="https://www.youtube.com/watch?v=HppJHKwCGCo" target="_blank"><span class="glyphicon glyphicon-facetime-video"></span>&nbsp;Video </a></li>
+                    <li><a ng-href="http://www.StationBreakTV.com/" target="_blank"><img favicon url="'http://www.software-rus.com/'" description="'SB'">&nbsp;Infomercials </a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -574,29 +743,34 @@
 
     <div class="container top_container" style="padding-top:90px !important;">
 
-          <div class="container-fluid" style="background-color: #ffffff;">
+        <div class="container-fluid" style="background-color: #ffffff;">
+            <header></header>
 
-              <div class="well inside_header" ng-controller="storeController">
-                  <a class="logo" href="{{INSIDE_HEADER_LINK}}" target="_blank" style="margin-top: -8px !important;display:inline !important;">
-                      <img src="{{INSIDE_HEADER_IMAGE}}" alt="logo" />
-                  </a>
-                  <h1 ng-bind-html="INSIDE_HEADER_TITLE | unsafe" style="margin-top: 0px !important;border:0px none transparent !important;display:inline !important;"></h1>
-              </div>
+            <div class="inside_header" ng-controller="storeController">
+                <a class="logo" href="{{INSIDE_HEADER_LINK}}" target="_blank" style="margin-top: -8px !important;">
+                    <img src="{{INSIDE_HEADER_IMAGE}}" alt="logo" />
+                </a>
+                <h1 class="well" style="border:0px none transparent !important;">
+                    <div ng-bind-html="INSIDE_HEADER_TITLE | unsafe" style="margin-top: -18px !important;"></div>
+                </h1>
+            </div>
 
-              <div ng-view></div>
+            <header style="margin-top:-12px !important;"></header>
 
-              <hr />
-              <div class="ads center-wrapper">
-              </div>
-              <div class="row-fluid content-footer">
-                  <!--ADD YOUR OWN COPYRIGHT NOTICE HERE-->  
-                  <!--<div class="col-md-12" style="background:#fff;padding:20px;text-align:center;"><p>Copyright © 2010 - 2015 Ouslan, Inc. All rights reserved worldwide.</p></div>-->
-              </div>
-          </div>
-      </div>
+            <div ng-view></div>
+
+            <hr />
+            <div class="ads center-wrapper">
+            </div>
+            <div class="row-fluid content-footer">
+                <!--ADD YOUR OWN COPYRIGHT NOTICE HERE-->
+                <div class="col-md-12" style="background:#fff;padding:20px;text-align:center;"><p>Copyright © 2010 - 2015 Ouslan, Inc. All rights reserved worldwide.</p></div>
+            </div>
+        </div>
+    </div>
 
 
-  </body>
+</body>
 </html>
 
 <!--In AngularJS 1.2 or AngularJS 1.3, this could no longer be done. 
@@ -618,7 +792,4 @@ Now, modify your HTML code from this:
 And change it to this:
 <p ng-bind-html="comment.text | unsafe"></p>
 This will run your comment.text through the “unsafe” filter we just created, and once again, your output will have the HTML parsed properly.-->
-
-
-
 

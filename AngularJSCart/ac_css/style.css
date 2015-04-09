@@ -1,9 +1,11 @@
-﻿* { margin: 0; padding: 0; }
+﻿/* --- main layout --- */
+	
+* { margin: 0; padding: 0; }
 
 body {
     min-height: 2000px; /* for bootstrap 3 fixed navbar fix */
-    padding: 70px 0px 0px 0px; /* for bootstrap 3 fixed navbar fix */  
-    margin:0;
+    padding: 0px 0px 0px 0px; /* for bootstrap 3 fixed navbar fix */  
+    margin: 0px auto;
     -webkit-background-size: 100%; 
     -moz-background-size: 100%; 
     -o-background-size: 100%; 
@@ -21,14 +23,13 @@ html {
   background-size: cover;
 }
 	
-.clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0} 
-.nowrp {white-space:nowrap;}
-.wrapper {width:100%; overflow:hidden;}
-.logo {
-	float:left;
-	margin: 0px 10px 0px 20px;
-}
 
+
+a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+.clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0} 
 
 .autoResizeImage {
     max-width: 100%;
@@ -58,7 +59,7 @@ html {
    
 
 
-
+.clear {clear:both}
 .alignright {text-align:right}
 .aligncenter {
     text-align:center !important;
@@ -70,14 +71,6 @@ html {
 
 img {vertical-align:top;padding-top:0px;}
 
-.imgcart {
-    width:300px !important;
-    height:auto !important;
-    vertical-align:top !important;
-    padding-top:0px !important;
-    padding-bottom:12px !important;
-    padding-right:120px !important;
-}
 
 .photopopup (
     max-width:280px !important;
@@ -100,6 +93,16 @@ img {vertical-align:top;padding-top:0px;}
 }
 
 	
+.clear {clear:both}
+.nowrp {white-space:nowrap;}
+.wrapper {width:100%; overflow:hidden;}
+
+#logo {
+	top: 0;
+	padding: 4px 0 0 0;
+	vertical-align:top;
+}
+
 #zheader {
  width: 100%;
  margin: 0 auto !important;

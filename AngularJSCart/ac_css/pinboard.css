@@ -12,7 +12,7 @@
 
 .logo {
 	float:left;
-	margin: 20px 10px 0px 20px;
+	padding: 6px 10px 0px 20px;
 }
 .container-shadow {
 	box-shadow:0 2px 5px rgba(0,0,0,0.4);
@@ -25,7 +25,7 @@
     text-transform: capitalize;
 	font-weight:300;
 	border-radius: 1px;
-	margin-top:20px;
+	margin-top:6px;
 	box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
 	margin-bottom:0px;
 	border-top: 1px solid #E3E3E3;

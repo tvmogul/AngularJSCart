@@ -42,13 +42,11 @@
     <link href="ac_css/sticky.css" rel="stylesheet" />
     <link href="ac_css/hover.css" rel="stylesheet" media="all">
 
-
-
-
-    <script src="ac_js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="ac_js/jquery-1.11.3.min.js" type="text/javascript"></script>
     <script src="ac_js/bootstrap.min.js" type="text/javascript"></script>
 
-    <script src="ac_js/angular.1.3.15.min.js" type="text/javascript"></script>
+    <!-- AngularStore app -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="ac_js/angular-route.1.3.15.min.js" type="text/javascript"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800" rel="stylesheet" type="text/css">
@@ -57,6 +55,11 @@
     <!-- AngularStore app -->
     <script src="ac_products/config.js"></script>
     <script src="ac_js/shoppingCart.js"></script>
+
+    <link href="ac_css/slick.css" rel="stylesheet" type="text/css" />
+    <script src="ac_js/slick.js" type="text/javascript"></script>
+    <script src="ac_js/slick-angular.js" type="text/javascript"></script>
+
     <script src="ac_js/app.js" type="text/javascript"></script>
 
 
@@ -77,7 +80,7 @@
     <script>
         var _carousel_animation = "hvr-pulse";
 
-        var _navbar_theme = "navbar_gray_gradient";
+        var _navbar_theme = "navbar_dkred_gradient";
         var arBGs = [
         "ac_img/bg0.jpg",
         "ac_img/bg1.jpg",
@@ -500,8 +503,19 @@
       color: #666;
     }
 
+    .inside_header {
+        margin: -12px 0 0 0 !important;
+    }
+    div.product_block {
+        padding: 18px 0 0 0 !important;
+    }
+    .selected-class-name {
+        background-color: #eb5c12 !important;
+    }
 
-
+    .placeholder {
+        color: #aaa;
+    }
     </style>
 
 
@@ -519,17 +533,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div style"margin-top -20px !important;">
-                    <a class="your-brand" href="{{NAVBAR_LOGO_LINK}}" target="_blank"><span class="puffed">{{NAVBAR_LOGO_TEXT}}</span></a>
+                <div style="display:inline !important;">
+                    <a class="your-brand" href="{{NAVBAR_LOGO_LINK}}" target="_blank">
+                        <img src="{{NAVBAR_LOGO_IMAGE}}" alt="logo" style="padding-top: 6px !important;">                   
+                     </a>
                 </div>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-database"></span>&nbsp;Data Sources<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-model="dataModel" ng-repeat="option in dataOptions"
+                                ng-class="{ 'selected-class-name': $index == selectedDataIndex }">
+                                <a href="#" ng-click="loadData($index)"><img src="{{option.img}}" />&nbsp;{{option.name}}</a>
+                            </li>
+                        </ul>
+                    </li>
                     <!--An elegant way to set the active tab is to use ng-controller to run a single controller outside of the ng-view as shown below:-->
                     <li ng-class="{ active: isActive('/store')}" id="store"><a ng-href="storefront.html#/store"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Store</a></li>
                     <li ng-class="{ active: isActive('/cart')}" id="cart"><a ng-href="storefront.html#/cart"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Cart</a></li>
-                    <!--<li ng-click="showHideCarousel($event)"><a href="#"><span class="glyphicon glyphicon-transfer"></span>&nbsp;Carousel </a></li>-->
-                    <li><a target="_blank" ng-href="http://www.software-rus.com/storefront.html"><span class="glyphicon glyphicon-transfer"></span>&nbsp;Carousel </a></li>
                     <li ng-click="changeBackgroundImage($event)"><a href="#"><span class="glyphicon glyphicon-wrench"></span>&nbsp;BG </a></li>
                     <li class="dropdown">
                         <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"></span>&nbsp;NavBars<span class="caret"></span></a>
@@ -733,9 +756,33 @@
                             <li><a ng-href="https://vine.co/" target="_blank"><img favicon url="'https://vine.co/'" description="'Vine'">&nbsp;<img src="ac_img/13_vine.png"></a></li>
                         </ul>
                     </li>
-                    <li><a ng-href="http://www.software-rus.com/powerpinboard.html" target="_blank"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;Source Code </a></li>
-                    <li><a ng-href="https://www.youtube.com/watch?v=HppJHKwCGCo" target="_blank"><span class="glyphicon glyphicon-facetime-video"></span>&nbsp;Video </a></li>
-                    <li><a ng-href="http://www.StationBreakTV.com/" target="_blank"><img favicon url="'http://www.software-rus.com/'" description="'SB'">&nbsp;Infomercials </a></li>
+                    <li class="dropdown">
+                        <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-thumbs-up"></span>&nbsp;Cool Stuff<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a ng-href="http://www.pat2pdf.org" target="_blank" /><img favicon url="'http://www.uspto.gov/'" description="'Free Patent Copies'">&nbsp;FREE Patent Copies</a></li>
+                            <li><a ng-href="http://www.software-rus.com/powerpinboard.html" target="_blank"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;FREE Source Code </a></li>
+                            <li><a href="http://www.SerGioApps.com/" target="_blank"><span class="glyphicon glyphicon-usd"></span>&nbsp;Sell Your Apps on TV<span></span></a></li>
+                            <li><a ng-href="http://www.stationbreak.net/" target="_blank"><img favicon url="'http://www.software-rus.com/powerpinboard.html'" description="'Creat A TV Spot'">&nbsp;Creat A TV Spot </a></li>
+                            <li><a ng-href="http://www.stationbreak.net/SBDemos/Reports/rSalesByMonthTotals.pdf" target="_blank" /><img favicon url="'http://www.sergioapps.com/'" description="'TV Sales Results'">&nbsp;TV Sales Results</a></li>
+                            <li><a ng-href="http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects" target="_blank" /><img favicon url="'http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects'" description="'Text effects'">&nbsp;Text Effects</a></li>
+                            <li><a ng-href="http://www.colorzilla.com/gradient-editor/" target="_blank" /><img favicon url="'http://www.colorzilla.com/gradient-editor/'" description="'CSS Colors'">&nbsp;CSS Colors</a></li>
+                            <!--<li><a ng-href="../tools/symbols.html" target="_blank" />Symbols</a></li>-->
+                            <li><a ng-href="http://www.census.gov/2010census/popmap/" target="_blank" /><img favicon url="'http://www.census.gov/2010census/popmap/'" description="'Pop Map'">&nbsp;Pop Map</a></li>
+                            <li><a ng-href="http://www.cooltext.com/" target="_blank" /><img favicon url="'http://www.cooltext.com/'" description="'Cool Text'">&nbsp;Cool Text</a></li>
+                            <li><a ng-href="http://www.cssbuttongenerator.com/" target="_blank" /><img favicon url="'http://www.cssbuttongenerator.com/'" description="'Button Maker'">&nbsp;Button Maker</a></li>
+                            <li><a ng-href="http://ezgif.com/maker" target="_blank" /><img favicon url="'http://ezgif.com/maker'" description="';GIF Maker'">&nbsp;GIF Maker</a></li>
+                            <li><a ng-href="http://www.plugolabs.com/twitter-bootstrap-button-generator/" target="_blank" /><img favicon url="'http://www.plugolabs.com/twitter-bootstrap-button-generator/'" description="'Bootstrap Buttons'">&nbsp;Bootstrap Buttons</a></li>
+                            <li><a ng-href="http://www.regexr.com/" target="_blank" /><img favicon url="'http://www.regexr.com/'" description="'Regex'">&nbsp;Regex</a></li>
+                            <li><a ng-href="http://www.qrstuff.com/" target="_blank" /><img favicon url="'http://www.qrstuff.com/'" description="'QR Stuff'">&nbsp;QR Stuff</a></li>
+                            <li><a ng-href="http://www.online-image-editor.com/" target="_blank" /><img favicon url="'http://www.online-image-editor.com/'" description="'Image Editor'">&nbsp;Image Editor</a></li>
+                            <li><a ng-href="http://ezgif.com/maker" target="_blank" /><img favicon url="'http://ezgif.com/maker'" description="'GIF Maker'">&nbsp;GIF Maker</a></li>
+                            <li><a ng-href="http://video.online-convert.com/" target="_blank" /><img favicon url="'http://video.online-convert.com/'" description="'Video Converter'">&nbsp;Video Converter</a></li>
+                            <li><a ng-href="http://www.facegarage.com/photoEditors/youtubeToGIF" target="_blank" /><img favicon url="'http://www.facegarage.com/photoEditors/youtubeToGIF'" description="'YouTube2Gif Converter'">&nbsp;YouTube2Gif Converter</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" style="padding-right:22px !important;">
+                    <li><a ng-href="https://www.youtube.com/watch?v=HppJHKwCGCo" target="_blank"><span class="fa fa-video-camera"></span>&nbsp;Free Movies<span></span></a>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -751,13 +798,13 @@
                     <img src="{{INSIDE_HEADER_IMAGE}}" alt="logo" />
                 </a>
                 <h1 class="well" style="border:0px none transparent !important;">
-                    <div ng-bind-html="INSIDE_HEADER_TITLE | unsafe" style="margin-top: -18px !important;"></div>
+                    <div ng-bind-html="INSIDE_HEADER_TITLE | unsafe" style="margin: -20px 0 4px 0 !important;"></div>
                 </h1>
             </div>
 
             <header style="margin-top:-12px !important;"></header>
 
-            <div ng-view></div>
+            <div ng-view autoscroll="true"></div>
 
             <hr />
             <div class="ads center-wrapper">

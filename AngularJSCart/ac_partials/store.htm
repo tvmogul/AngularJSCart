@@ -1,14 +1,7 @@
-
-<div id="storeslider_wrapper" class="row" style="margin-top: 0px !important;padding-top: 0px !important;">
-</div>
-<!--Author - Bill SerGio: Unslash the line of code below AFTER you have pasted in teh cod efor my AngularJS Slick Carousel !!!-->
-<!--<header class="carousel_trim" style="margin-top:-30px !important;"></header>-->
-
 <!-- BILL SERGIO - for use in my Responsive Mobile AngularJS Shopping Cart use the 2 lines of code below to add to cart -->
 <!-- BILL SERGIO - use this code if slider is NOT in my Responsive Mobile AngularJS Shopping Cart -->
 <!-- BILL SERGIO - This allows a distributor selling your products to place this slider on their NON-AngularJS website -->
 <!--<a ng-href="http://www.software-rus.com/storefront.html?distid={{DISTRIBUTOR_ID}}&sku={{slide.sku}}#/cart" target="_blank" class="btn btn-sm btn-default">Buy </a>-->
-
 
 <div id="store" class="content col-md-12" style="overflow: hidden;" ng-controller="storeController">
     <form class="form-search">
@@ -42,32 +35,37 @@
                 </tr>
             </table>
 
-
             <div style="width: 300px !important;padding-bottom: 12px !important;">
                 <input type="text" ng-model="query" ng-change="search('productname')" class="searchbox" placeholder="Search">
             </div>
             <div class="filter-button-top">
                 <button class="btn flr-top-first" ng-click="filterCategory('categoryname',null)">All</button>
-                <button class="btn flr-top" ng-click="filterCategory('categoryname','software')">Software</button>
-                <button class="btn flr-top" ng-click="filterCategory('categoryname','cool')">Cool</button>
-                <button class="btn flr-top flr-last" ng-click="filterCategory('categoryname','course')">Courses</button>
             </div>
+            <div ng-repeat="product in products | unique: 'categoryname'" class="filter-button-top">
+                <button class="btn flr-top" ng-click="filterCategory('categoryname', product.categoryname)">{{product.categoryname}}</button>
+            </div>
+            <!--<div class="filter-button-top">
+                <button class="btn flr-top-first" ng-click="filterCategory('categoryname',null)">All</button>
+                <button class="btn flr-top" ng-click="filterCategory('categoryname','software')">Software</button>
+                <button class="btn flr-top" ng-click="filterCategory('categoryname','drones')">Drones</button>
+                <button class="btn flr-top flr-last" ng-click="filterCategory('categoryname','courses')">Courses</button>
+                <button class="btn flr-top flr-last" ng-click="filterCategory('categoryname','comics')">Comics</button>
+            </div>-->
 
-        </div>
+            </div>
 
         <div class="clear" style="height: 4px !important;"></div>
 
         <div id="cbp-vm" class="cbp-vm-switcher" ng-class="{true: '', false: 'activegrid'}[isActive]">
             <ul id="product" class="nav-pills nav-stacked rectangle-list">
                 <li ng-repeat="product in pagedItems[currentPage] | filter:query | orderBy:'sortorder'" class="store_pill ng-scope {{AN_STORE_PILL}}">
-
                     <div class="store_img_video {{AN_STORE_IMG_VIDEO}}">
                         <div ng-hide="product.showvideo > 0" ng-show="product.showvideo < 1">
                             <!--USE THIS TO POPUP MODAL DIALOG: <a href="#" ng-click="launchSimpleModal(product)"> -->
                             <a href="#/products/{{product.sku}}"><img src="{{PRODUCTS_FOLDER}}/{{product.imagename}}" alt="{{product.productname}}" style="display: block;height: 100%;max-height:200px" /></a>
                         </div>
                         <div ng-show="product.showvideo > 0">
-                            <div my-youtube code="product.videoid"></div>
+                            <div embed-video tube="product.tube" code="product.videoid"></div>
                         </div>
                     </div>
 
@@ -81,21 +79,23 @@
                             </span>
                         </div>
                         <div style="display:inline !important">
-                            <a href="" ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)">
+                            <a href="" ng-click="cart.addItem(product.sku, product.productname, product.unitprice, 1)" autoscroll>
                                 <div class="btn btn-x-blue">Add cart</div>
                             </a>
                             <a ng-href="#/products/{{product.sku}}">
                                 <div class="btn btn-x-blue">Details</div>
                             </a>
-                            <div class="categoryname" href="#" style="margin:2px 5% 0px 20px !important;float:right !important;">{{product.categoryname}}</div>
 
-                            <div class="content_price" style="text-align:right !important;padding:0px 5% 0px 20px !important;float:none !important;">
+                            <div class="content_price"
+                                 style="text-align:right !important;padding:0 5% 0 20px !important;float:right !important;">
                                 {{product.unitprice | currency}}
                                 <span ng-show="cart.getTotalCount(product.sku) > 0">
                                     <i class="fa fa-check-square-o"></i>{{cart.getTotalCount(product.sku)}}
                                 </span>
                             </div>
                         </div>
+                        <br />
+                        <div class="categoryname" href="#" style="margin:2px 5% 0 20px !important;float:right !important;">{{product.categoryname}}</div>
                     </div>
                 </li>
             </ul>

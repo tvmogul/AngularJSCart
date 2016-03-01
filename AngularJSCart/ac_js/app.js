@@ -4,7 +4,7 @@
 // the route provides parses the URL and injects the appropriate partial page
 // Note: I don't recommend passing in'ui.bootstrap' as a dependency UNLESS you love update issues
 //
-var storeApp = angular.module('AngularStore', ['ngRoute', 'storeApp.config', 'favicon', 'igTruncate']).
+var storeApp = angular.module('AngularStore', ['ngRoute', 'storeApp.config', 'slick', 'favicon', 'igTruncate']).
 config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/store', {
@@ -25,6 +25,14 @@ config(['$routeProvider', function ($routeProvider) {
     } 
 ]);
 
+angular.module("storeApp", ["ngScrollTo"])
+.config(function (ngScrollToOptionsProvider) {
+    ngScrollToOptionsProvider.extend({
+        handler: function (el) {
+            $(el).scrollintoview();
+        }
+    });
+});
 
 // the storeController contains two objects & the DataService:
 // - store: contains the product list
@@ -32,6 +40,13 @@ config(['$routeProvider', function ($routeProvider) {
 // - DataService: called to retrieve products from JSON file
 storeApp.controller('storeController', function ($scope, $filter, $routeParams, $location, DataService, $sce, CONFIG) {
     $scope.dataLoaded = false;
+
+    var dataIndex = localStorage["data_src_index"];
+    if (dataIndex == null || dataIndex == "undefined") {
+        dataIndex = 0;
+        localStorage["data_src_index"] = 0;
+    }
+    $scope.selectedDataIndex = dataIndex;
 
     /*#####################
     CONFIG
@@ -47,6 +62,7 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
     $scope.PRODUCTS_FILE = CONFIG.CF_PRODUCTS_FILE;
     $scope.PRODUCTS_FOLDER = CONFIG.CF_PRODUCTS_FOLDER;
     $scope.NAVBAR_THEME = CONFIG.CF_NAVBAR_THEME;
+    $scope.NAVBAR_LOGO_IMAGE = CONFIG.CF_NAVBAR_LOGO_IMAGE;
     $scope.NAVBAR_LOGO_TEXT = CONFIG.CF_NAVBAR_LOGO_TEXT;
     $scope.NAVBAR_LOGO_LINK = CONFIG.CF_NAVBAR_LOGO_LINK;
     $scope.INSIDE_HEADER_SHOW = CONFIG.CF_INSIDE_HEADER_SHOW;
@@ -64,20 +80,6 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
     $scope.BASE_URL = CONFIG.CF_BASE_URL;
     $scope.API_URL = CONFIG.CF_API_URL;
     $scope.GOOGLE_ANALYTICS_ID = CONFIG.CF_GOOGLE_ANALYTICS_ID;
-    /* for future versions */
-    //$scope.DB = CONFIG.CF_DB;
-    //$scope.DATABASENAME = CONFIG.CF_DATABASENAME;
-    //$scope.TABLE1 = CONFIG.CF_TABLE1;
-    //$scope.TABLE2 = CONFIG.CF_TABLE2;
-    //$scope.KEYPATH1 = CONFIG.CF_KEYPATH1;
-    //$scope.KEYPATH2 = CONFIG.CF_KEYPATH2;
-    //$scope.INDEX1 = CONFIG.CF_INDEX1;
-    //$scope.INDEX2 = CONFIG.CF_INDEX2;
-    //$scope.INDEX3 = CONFIG.CF_INDEX3;
-    //$scope.DB_VERSION = CONFIG.CF_DB_VERSION;
-    //$scope.GLOBALCOUNTER = CONFIG.CF_GLOBALCOUNTER;
-    //$scope.LOADED = CONFIG.CF_LOADED;
-    //$scope.SERVICEORDERS = CONFIG.CF_SERVICEORDERS;
 
     $scope.filteredItems = [];
     $scope.groupedItems = [];
@@ -195,6 +197,12 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
         //////////////////////////////////////////////////////////////////////////////
 
         $scope.forceAddItem = function (sku, productname, unitprice, quantity) {
+            //slick.dataLoaded = true;
+            //var sku = "BabyMop";
+            //var productname = "Baby Mop";
+            //var unitprice = "22.27";
+            //var quantity = 1;
+
             DataService.cart.addItem(sku, productname, unitprice, quantity);
 
             $scope.$apply(function () {
@@ -270,78 +278,78 @@ storeApp.controller('storeController', function ($scope, $filter, $routeParams, 
         $scope.filterCategory();
         $scope.search();
         ////////////////////////////////////////////////////////////////////////
+        $scope.vchr_date = new Date($scope.product.expecteddate);
 
-
+        $scope.getDate = function (item) {
+            //var date = new Date(parseInt(jsonDate.substr(6)));
+            //var date = eval(jsonDate.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"));
+            return new Date(item);
+        };
 
 
     }); /* END - DataService */
 
 });
 
-//function mycontroller($scope) {
-//    $scope.myfunction = function () {
-//        //do some stuff here
-//    }
-//}
 
-//$scope.forceAddItem = function (sku, productname, unitprice, quantity) {
-//    DataService.cart.addItemUrl(sku, productname, unitprice, quantity);
-//};
-
-//projectsApp.factory("Project", function ($http) {
-//    var json = $http.get("project.json").then(function (response) {
-//        return response.data;
-//    });
-
-//    var Project = function (data) {
-//        if (data) angular.copy(data, this);
-//    };
-
-//    Project.query = function () {
-//        return json.then(function (data) {
-//            return data.map(function (project) {
-//                return new Project(project);
-//            });
-//        })
-//    };
-
-//    Project.get = function (id) {
-//        return json.then(function (data) {
-//            var result = null;
-//            angular.forEach(data, function (project) {
-//                if (project.CF_STORE_ID == id) result = new Project(project);
-//            });
-//            return result;
-//        })
-//    };
-
-//    return Project;
-//});
-
- // create a data service that provides a store and a shopping cart that
+// I created a data service that provides the store and a shopping cart that
 // will be shared by all views (instead of creating fresh ones for each view).
 storeApp.factory('DataService', function ($http, $q, CONFIG) {
+
+    // Store can be loadded from a JSON file, a local .mdf database, or a remote database.
+    //'CF_DATA_FILE': 'ac_products/products.js',
+    //'CF_DATA_LOCAL': '/crud.ashx?ac=getproducts&cn=local',
+    //'CF_DATA_REMOTE': '/crud.ashx?ac=getproducts&cn=remote',
+
+    var dataIndex = localStorage["data_src_index"];
+    if (dataIndex == null || dataIndex == "undefined") {
+        dataIndex = 0;
+        localStorage["data_src_index"] = 0;
+    }
+
+    var dataSource;
+    if (dataIndex == 0) {
+        dataSource = "/" + CONFIG.CF_DATA_FILE + "?rnd=" + new Date().getTime();
+    }
+    else if (dataIndex == 1) {
+        dataSource = CONFIG.CF_DATA_LOCAL;
+    }
+    else if (dataIndex == 2) {
+        dataSource = CONFIG.CF_DATA_REMOTE;
+    }
 
     function Store() {
         var productsDeferred = $q.defer();
         this.products = productsDeferred.promise; //this.products is a promise
-        $http.get(CONFIG.CF_PRODUCTS_FILE).success(function (data) {
+
+        $http.get(dataSource).success(function (data, status, headers, config) {
             var products = [];
             for (var i = 0, len = data.length; i < len; i++) {
                 var prod = data[i];
                 if (prod.storeid == "7cc6cb94-0938-4675-b84e-6b97ada53978") {
+                    var _expecteddate = new Date(prod.expecteddate);
+                    prod.expecteddate = _expecteddate;
                     products.push(prod);
                 }
             }
             productsDeferred.resolve(products);
+        }).error(function (data, status, headers, config) {
+            alert("Please check you have updated ConnectionString with YOUR OWN information!");
+            // Please note that in this sample project you need to update "remoteCartConnectionString" with your own data !!!
+            //<add name="remoteCartConnectionString" connectionString="ADD_YOUR_CONNECTION_STRING\SQLEXPRESS;Initial Catalog=ACart;user=YOUR_USERNAME;pwd=YOUR_PASSWORD" providerName="System.Data.SqlClient"/>
         });
     }
 
     Store.prototype.getProduct = function (sku) {
         return this.products.then(function (products) {
             for (var i = 0; i < products.length; i++) { // MUST use products, it's the real value; this.products is a promise
-                if (products[i].sku == sku)
+                if (products[i].sku == sku) {
+                    var _expecteddate = new Date(products[i].expecteddate);
+                    products[i].expecteddate = _expecteddate;
+                    //var _unitprice = products[i].unitprice.replace(/,/g, "").replace(/\s/g, "");
+                    //products[i].unitprice = _unitprice;
                     return products[i];
+                }
             }
             return null;
         });
@@ -349,9 +357,14 @@ storeApp.factory('DataService', function ($http, $q, CONFIG) {
 
     Store.prototype.getProducts = function () {
         return this.products.then(function (products) {
+            var _expecteddate = new Date(products.expecteddate);
+            products.expecteddate = _expecteddate;
+            //var _unitprice = products.unitprice.replace(/,/g, "").replace(/\s/g, "");
+            //products.unitprice = _unitprice;
             return products;
         });
     };
+
 
     // create store
     var myStore = new Store();
@@ -411,6 +424,100 @@ storeApp.filter('unsafe', function ($sce) {
     };
 });
 
+// AUTHOR: Bill SerGio
+// Create a list of categoryname buttons to set categoryname filter
+storeApp.filter('unique', function () {
+    return function (collection, keyname) {
+        var output = [],
+            keys = [];
+
+        angular.forEach(collection, function (item) {
+            var key = item[keyname];
+            if (keys.indexOf(key) === -1) {
+                keys.push(key);
+                output.push(item);
+            }
+        });
+        return output;
+    };
+});
+
+storeApp.directive('scrollTo', ['ScrollTo', function (ScrollTo) {
+    return {
+        restrict: "AC",
+        compile: function () {
+
+            return function (scope, element, attr) {
+                element.bind("click", function (event) {
+                    event.preventDefault();
+                    ScrollTo.idOrName(attr.scrollTo, attr.offset);
+                });
+            };
+        }
+    };
+}])
+  .service('ScrollTo', ['$window', 'ngScrollToOptions', function ($window, ngScrollToOptions) {
+
+      this.idOrName = function (idOrName, offset, focus) {//find element with the given id or name and scroll to the first element it finds
+          var document = $window.document;
+
+          if (!idOrName) {//move to top if idOrName is not provided
+              $window.scrollTo(0, 0);
+          }
+
+          if (focus === undefined) { //set default action to focus element
+              focus = true;
+          }
+
+          //check if an element can be found with id attribute
+          var el = document.getElementById(idOrName);
+          if (!el) {//check if an element can be found with name attribute if there is no such id
+              el = document.getElementsByName(idOrName);
+
+              if (el && el.length)
+                  el = el[0];
+              else
+                  el = null;
+          }
+
+          if (el) { //if an element is found, scroll to the element
+              if (focus) {
+                  el.focus();
+              }
+
+              ngScrollToOptions.handler(el, offset);
+          }
+
+          //otherwise, ignore
+      }
+
+  }])
+  .provider("ngScrollToOptions", function () {
+      this.options = {
+          handler: function (el, offset) {
+              if (offset) {
+                  var top = $(el).offset().top - offset;
+                  window.scrollTo(0, top);
+              }
+              else {
+                  el.scrollIntoView();
+              }
+          }
+      };
+      this.$get = function () {
+          return this.options;
+      };
+      this.extend = function (options) {
+          this.options = angular.extend(this.options, options);
+      };
+  });
+
+storeApp.filter('unsafe', function ($sce) {
+    return function (val) {
+        return $sce.trustAsHtml(val);
+    };
+});
+
 storeApp.directive('myYoutube', function ($sce) {
     return {
         restrict: 'EA',
@@ -430,7 +537,60 @@ storeApp.directive('myYoutube', function ($sce) {
 });
 
 
-
+storeApp.directive('embedVideo', function ($sce) {
+    return {
+        restrict: 'EA',
+        scope: { tube: '=', code: '=' },
+        replace: true,
+        template: '<div class="video"><iframe src="{{url}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>',
+        link: function (scope) {
+            //console.log('here');
+            //document.cookie="VISITOR_INFO1_LIVE=oKckVSqvaGw; path=/; domain=.youtube.com";window.location.reload();
+            scope.url = "about:blank";
+            scope.$watch('code', function (videoidVal) {
+                if (videoidVal) {
+                    if (scope.tube === 'youtube') {
+                        scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + videoidVal);
+                    }
+                    else if (scope.tube === 'youku') {
+                        scope.url = $sce.trustAsResourceUrl("http://player.youku.com/embed/" + videoidVal);
+                    }
+                    else if (scope.tube === 'vimeo') {
+                        scope.url = $sce.trustAsResourceUrl("http://player.vimeo.com/video/" + videoidVal);
+                    }
+                    else if (scope.tube === 'dailymotion') {
+                        scope.url = $sce.trustAsResourceUrl("http://www.dailymotion.com/embed/video/" + videoidVal);
+                    }
+                    else if (scope.tube === '5min') {
+                        scope.url = $sce.trustAsResourceUrl("http://embed.5min.com/" + videoidVal);
+                    }
+                    else if (scope.tube === 'cc') {
+                        scope.url = $sce.trustAsResourceUrl("http://media.mtvnservices.com/embed/" + videoidVal);
+                    }
+                    else if (scope.tube === 'metacafe') {
+                        scope.url = $sce.trustAsResourceUrl("http://www.metacafe.com/embed/" + videoidVal);
+                    }
+                    else if (scope.tube === 'liveleak') {
+                        scope.url = $sce.trustAsResourceUrl("http://www.liveleak.com/ll_embed?f=" + videoidVal);
+                    }
+                    else if (scope.tube === 'ebaumsworld') {
+                        scope.url = $sce.trustAsResourceUrl("http://www.ebaumsworld.com/media/embed/" + videoidVal);
+                    }
+                    else if (scope.tube === 'bliptv') {
+                        scope.url = $sce.trustAsResourceUrl("http://blip.tv/play/" + videoidVal);
+                    }
+                    else if (scope.tube === 'funnyordie') {
+                        scope.url = $sce.trustAsResourceUrl("http://www.funnyordie.com/embed/" + videoidVal);
+                    }
+                    else if (scope.tube === 'stupidvideos') {
+                        scope.url = $sce.trustAsResourceUrl("http://www.stupidvideos.com/embed/?video=" + videoidVal);
+                    }
+                    scope.$apply();
+                }
+            });
+        }
+    };
+});
 
 
 
@@ -485,6 +645,7 @@ storeApp.controller('MyMenu', function ($scope, $filter, $location, CONFIG) {
     $scope.PRODUCTS_FILE = CONFIG.CF_PRODUCTS_FILE;
     $scope.PRODUCTS_FOLDER = CONFIG.CF_PRODUCTS_FOLDER;
     $scope.NAVBAR_THEME = CONFIG.CF_NAVBAR_THEME;
+    $scope.NAVBAR_LOGO_IMAGE = CONFIG.CF_NAVBAR_LOGO_IMAGE;
     $scope.NAVBAR_LOGO_TEXT = CONFIG.CF_NAVBAR_LOGO_TEXT;
     $scope.NAVBAR_LOGO_LINK = CONFIG.CF_NAVBAR_LOGO_LINK;
     $scope.INSIDE_HEADER_SHOW = CONFIG.CF_INSIDE_HEADER_SHOW;
@@ -523,12 +684,12 @@ storeApp.controller('MyMenu', function ($scope, $filter, $location, CONFIG) {
         localStorage['bg_cart'] = $scope.STORE_BG_IMAGE;
     }
 
-    _navbar_theme = "navbar_gray_gradient";
+    _navbar_theme = "navbar_dkred_gradient";
     if (localStorage["navbar_theme"]) {
         _navbar_theme = localStorage["navbar_theme"];
     } else {
-        _navbar_theme = "navbar_gray_gradient";
-        localStorage["navbar_theme"] = "navbar_gray_gradient";
+        _navbar_theme = "navbar_dkred_gradient";
+        localStorage["navbar_theme"] = "navbar_dkred_gradient";
     }
     var _path = "ac_css/" + _navbar_theme + ".css";
     $("#link_index").attr("href", _path);
@@ -538,7 +699,17 @@ storeApp.controller('MyMenu', function ($scope, $filter, $location, CONFIG) {
     $scope.showHideCarousel = function (event) {
         //event.stopPropagation();
         event.preventDefault();
-        alert("You need to download my AngularJS Slick Carousel and add it to the code for this cart!");
+
+        if ($('#storeslider_wrapper').css('display') === 'block') {
+            $('.carousel_trim').css('display', 'none');
+            $('#storeslider_wrapper').css('display', 'none');
+        }
+        else {
+            $('.carousel_trim').css('display', 'block');
+            $('#storeslider_wrapper').css('display', 'block');
+            $("#storeslider").slick('slickPrev');
+            $("#storeslider").slick('slickNext');
+        }
     }
 
     $scope.changeBackgroundImage = function (event) {
@@ -606,6 +777,18 @@ storeApp.controller('MyMenu', function ($scope, $filter, $location, CONFIG) {
         return viewLocation === $location.path();
     };
 
+    $scope.loadData = function ($index) {
+        //event.stopPropagation();
+        event.preventDefault();
+        $scope.selectedDataIndex = $index;
+        localStorage["data_src_index"] = $index;
+        window.location.reload();
+        return false;
+    }
+
+
+
+
     //initiate an array to hold all active tabs
     $scope.activeTabs = [];
 
@@ -641,6 +824,12 @@ storeApp.controller('MyMenu', function ($scope, $filter, $location, CONFIG) {
         return false;
     }
 
+    $scope.dataOptions = [
+    { name: 'JSON Products File', showinfo: '', img: 'ac_img/_json_file.png' },
+    { name: 'Local Database', showinfo: '', img: 'ac_img/_localdb.png' },
+    { name: 'Remote Database', showinfo: '', img: 'ac_img/_remotedb.png' }
+    ];
+
     // create a radioButtonGroup for our apply effects options
     $scope.optActions = [
         { id: 'apply', name: 'apply effect', disabled: false, showinfo: '' },
@@ -660,10 +849,8 @@ storeApp.controller('MyMenu', function ($scope, $filter, $location, CONFIG) {
     $scope.myOptions = [
         { id: 'store_img_video', name: 'store img', disabled: false, showinfo: '' },
         { id: 'store_pill', name: 'store pill', disabled: false, showinfo: '' },
-        //{ id: 'carousel_img_video', name: 'carousel img', disabled: false, showinfo: '' },
-        //{ id: 'carousel_pill', name: 'carousel pill', disabled: false, showinfo: '' }
-        { id: 'carousel_img_video', name: 'carousel img', disabled: false, showinfo: 'You need to download and install my AngularJS Slick Carousel to apply effects to the Carousel!' },
-        { id: 'carousel_pill', name: 'carousel pill', disabled: false, showinfo: 'You need to download and install my AngularJS Slick Carousel to apply effects to the Carousel!' }
+        { id: 'carousel_img_video', name: 'carousel img', disabled: false, showinfo: '' },
+        { id: 'carousel_pill', name: 'carousel pill', disabled: false, showinfo: '' }
     ];
     $scope.myModel = 'store_img_video';
     $scope.idProperty = "id";
@@ -671,6 +858,28 @@ storeApp.controller('MyMenu', function ($scope, $filter, $location, CONFIG) {
     $scope.bootstrapSuffix = "xs-success";
     $scope.disabledProperty = false;
     $scope.showinfoProperty = "";
+
+
+    //$('.carousel_img_video').removeClass(function (index, css) {
+    //    return (css.match(/(^|\s)hvr-\S+/g) || []).join(' ');
+    //});
+    //$('.carousel_pill').addClass($scope.AN_CAROUSEL_IMG_VIDEO);
+
+    //alert($scope.AN_CAROUSEL_IMG_VIDEO);
+    //$('.carousel_pill').removeClass(function (index, css) {
+    //    return (css.match(/(^|\s)hvr-\S+/g) || []).join(' ');
+    //});
+    //$('.carousel_pill').addClass($scope.AN_CAROUSEL_PILL);
+
+    //$('.store_img_video').removeClass(function (index, css) {
+    //    return (css.match(/(^|\s)hvr-\S+/g) || []).join(' ');
+    //});
+    //$('.store_img_video').addClass($scope.AN_STORE_IMG_VIDEO);
+
+    //$('.nav-pills li').removeClass(function (index, css) {
+    //    return (css.match(/(^|\s)hvr-\S+/g) || []).join(' ');
+    //});
+    //$('.nav-pills li').addClass($scope.AN_STORE_PILL);
 
 });
 
@@ -1059,3 +1268,44 @@ storeApp.directive('aDisabled', function ($compile) {
 //AN_CAROUSEL_PILL);
 //AN_STORE_IMG_VIDEO);
 //AN_STORE_PILL);
+
+
+//function mycontroller($scope) {
+//    $scope.myfunction = function () {
+//        //do some stuff here
+//    }
+//}
+
+//$scope.forceAddItem = function (sku, productname, unitprice, quantity) {
+//    DataService.cart.addItemUrl(sku, productname, unitprice, quantity);
+//};
+
+//projectsApp.factory("Project", function ($http) {
+//    var json = $http.get("project.json").then(function (response) {
+//        return response.data;
+//    });
+
+//    var Project = function (data) {
+//        if (data) angular.copy(data, this);
+//    };
+
+//    Project.query = function () {
+//        return json.then(function (data) {
+//            return data.map(function (project) {
+//                return new Project(project);
+//            });
+//        })
+//    };
+
+//    Project.get = function (id) {
+//        return json.then(function (data) {
+//            var result = null;
+//            angular.forEach(data, function (project) {
+//                if (project.CF_STORE_ID == id) result = new Project(project);
+//            });
+//            return result;
+//        })
+//    };
+
+//    return Project;
+//});

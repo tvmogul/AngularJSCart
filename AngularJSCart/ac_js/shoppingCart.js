@@ -359,8 +359,24 @@ shoppingCart.prototype.addFormFields = function (form, data) {
     }
 }
 shoppingCart.prototype.toNumber = function (value) {
-    value = value * 1;
+    var num = stripNonNumeric(value);
+    value = num * 1;
     return isNaN(value) ? 0 : value;
+}
+
+function stripNonNumeric(str) {
+    str += '';
+    var rgx = /^d|.|-$/;
+    var out = '';
+    for (var i = 0; i < str.length; i++) {
+        if (rgx.test(str.charAt(i))) {
+            if (!((str.charAt(i) == '.' && out.indexOf('.') != -1) ||
+                   (str.charAt(i) == '-' && out.length != 0))) {
+                out += str.charAt(i);
+            }
+        }
+    }
+    return out;
 }
 
 //----------------------------------------------------------------

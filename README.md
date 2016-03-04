@@ -5,6 +5,12 @@
 
 <h2>AngularJS Responsive Video Mobile Shopping Cart</h2>
 
+<a href="http://www.codeproject.com/Articles/881354/A-Shopping-Cart-using-Angular-Mobile-Responsive" target="_blank">Read CodeProject Article for Amgular Shopping Cart</a>
+
+<a href="http://www.codeproject.com/Articles/1082042/Angular-Shopping-Cart-Editor" target="_blank">Download Source Code for Angular Editor</a>
+
+<a href="https://www.youtube.com/watch?v=HppJHKwCGCo" target="_blank">How to Install Mobile Apps on Any TV & Get Free Movies Legally</a>
+
 <p>This article presents a full-featured, Mobile AngularJS Shopping Cart with Videos and many other goodies.</p>
 
 <table style="max-width:600px !important;">

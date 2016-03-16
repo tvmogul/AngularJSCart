@@ -11,6 +11,36 @@
  * Hover.css Copyright Ian Lunn 2014. Generated with Sass.
  */
 /* 2D TRANSITIONS */
+
+/* spin360 by Bill SerGio, The Infomercial King www.SerGioApps.com */
+.hvr-spin360
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@-webkit-keyframes hvr-spin360 
+{
+    0% { -webkit-transform: rotateX(0); }
+    100%   { -webkit-transform: rotateX(-360deg); }
+}   
+    
+.hvr-spin360:hover, .hvr-spin360:focus, .hvr-spin360:active {
+    -webkit-animation-name: hvr-spin360;
+    animation-name: hvr-spin360;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+}
+
+#pinboard { 
+    perspective: 1000;  
+ } 
+
+
 /* Grow */
 .hvr-grow {
   display: inline-block;

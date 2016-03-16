@@ -5,6 +5,7 @@
 
 <h2>AngularJS Responsive Video Mobile Shopping Cart</h2>
 
+<a href="http://www.software-rus.com/angularjscart.html" target="_blank"><strong>See Full-Featured Professional Version Here</strong></a>
 <a href="http://www.codeproject.com/Articles/881354/A-Shopping-Cart-using-Angular-Mobile-Responsive" target="_blank">Read CodeProject Article for Amgular Shopping Cart</a>
 
 <a href="http://www.codeproject.com/Articles/1082042/Angular-Shopping-Cart-Editor" target="_blank">Download Source Code for Angular Editor</a>

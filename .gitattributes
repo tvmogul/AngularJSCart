@@ -1,5 +1,5 @@
 *.angular linguist-detectable=true
-*.typescript linguist-detectable=false
+*.typescript linguist-detectable=true
 *.cs linguist-detectable=false
 *.java linguist-detectable=false
 *.javascript linguist-detectable=false
